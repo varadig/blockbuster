@@ -1,0 +1,82 @@
+{
+	// Feladatok: Terminal > Run Task... (vagy Ctrl+Shift+B az alapértelmezett build-hez)
+	"version": "2.0.0",
+	"options": {
+		"env": {
+			"HAXEPATH": "C:\\HaxeToolkit\\haxe",
+			"NEKO_INSTPATH": "C:\\HaxeToolkit\\neko",
+			"PATH": "C:\\HaxeToolkit\\haxe;C:\\HaxeToolkit\\neko;${env:PATH}"
+		}
+	},
+	"tasks": [
+		{
+			"label": "Install dependencies (haxelib)",
+			"detail": "Telepíti a rögzített verziójú lime, openfl, flixel könyvtárakat",
+			"type": "shell",
+			"command": "powershell",
+			"args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/scripts/setup.ps1"],
+			"problemMatcher": []
+		},
+		{
+			"label": "Build HTML5",
+			"type": "shell",
+			"command": "haxelib",
+			"args": ["run", "lime", "build", "html5"],
+			"group": { "kind": "build", "isDefault": true },
+			"problemMatcher": ["$haxe"]
+		},
+		{
+			"label": "Run HTML5 (browser)",
+			"detail": "Fordít, elindít egy helyi szervert (http://127.0.0.1:3000) és megnyitja a böngészőt",
+			"type": "shell",
+			"command": "haxelib",
+			"args": ["run", "lime", "test", "html5"],
+			"isBackground": true,
+			"problemMatcher": {
+				"owner": "haxe",
+				"pattern": { "regexp": "^(.+):(\\d+): characters (\\d+)-\\d+ : (.*)$", "file": 1, "line": 2, "column": 3, "message": 4 },
+				"background": { "activesBegin": "^", "beginsPattern": "^Starting up http-server", "endsPattern": "Hit CTRL-C to stop the server" }
+			}
+		},
+		{
+			"label": "Build HTML5 (test)",
+			"detail": "Tesztbuild: egyből a játék indul, window.__game elérhető (füstteszthez)",
+			"type": "shell",
+			"command": "haxelib",
+			"args": ["run", "lime", "build", "html5", "-Dtest"],
+			"group": "build",
+			"problemMatcher": ["$haxe"]
+		},
+		{
+			"label": "Build HashLink (native)",
+			"type": "shell",
+			"command": "haxelib",
+			"args": ["run", "lime", "test", "hl"],
+			"group": "build",
+			"problemMatcher": ["$haxe"]
+		},
+		{
+			"label": "Package for itch.io",
+			"detail": "Normál HTML5 build, majd dist/blockbuster-html5.zip (index.html a zip gyökerében)",
+			"type": "shell",
+			"command": "powershell",
+			"args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/scripts/package-itch.ps1"],
+			"problemMatcher": ["$haxe"]
+		},
+		{
+			"label": "Publish to itch.io",
+			"detail": "Build + feltöltés butlerrel (beállítás: itch.config.json, részletek: scripts/publish-itch.ps1)",
+			"type": "shell",
+			"command": "powershell",
+			"args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/scripts/publish-itch.ps1"],
+			"problemMatcher": ["$haxe"]
+		},
+		{
+			"label": "Clean build output",
+			"type": "shell",
+			"command": "haxelib",
+			"args": ["run", "lime", "clean", "html5"],
+			"problemMatcher": []
+		}
+	]
+}

@@ -1,3 +1,5 @@
 export/
 .haxelib/
 *.hl
+dist/
+tools/

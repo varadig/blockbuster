@@ -1,0 +1,11 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			// A Lime bővítmény indítója: a státuszsorban választott célra (pl. HTML5) fordít és futtat (F5)
+			"name": "Lime: run",
+			"type": "lime",
+			"request": "launch"
+		}
+	]
+}

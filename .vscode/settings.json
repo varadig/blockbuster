@@ -1,0 +1,33 @@
+{
+	// A Haxe-telepítő a PATH-ba kifejtetlen %HAXEPATH%-et írhat, ezért a haxe.exe-t és a környezetet
+	// itt közvetlenül adjuk meg (Windows alapértelmezett telepítési hely).
+	"haxe.executable": {
+		"path": "haxe",
+		"windows": {
+			"path": "C:/HaxeToolkit/haxe/haxe.exe",
+			"env": {
+				"HAXEPATH": "C:/HaxeToolkit/haxe",
+				"NEKO_INSTPATH": "C:/HaxeToolkit/neko"
+			}
+		}
+	},
+
+	// A Lime bővítmény ebből a projektfájlból olvassa a forrásokat és a függőségeket
+	"lime.projectFile": "Project.xml",
+
+	// A Haxe kódstílus a forrásokban: tabulátoros behúzás
+	"[haxe]": {
+		"editor.insertSpaces": false,
+		"editor.tabSize": 4,
+		"editor.detectIndentation": false
+	},
+
+	"files.exclude": {
+		"export/**": true,
+		"dist/**": true
+	},
+	"search.exclude": {
+		"export/**": true,
+		"dist/**": true
+	}
+}

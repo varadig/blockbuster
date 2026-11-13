@@ -1,0 +1,7 @@
+{
+	// Haxe nyelvi támogatás (kiegészítés, hibák, ugrás a definícióra) és Lime/OpenFL projektkezelés
+	"recommendations": [
+		"nadako.vshaxe",
+		"openfl.lime-vscode-extension"
+	]
+}

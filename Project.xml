@@ -4,12 +4,16 @@
 	<app main="Main" file="Blockbuster" path="export" />
 
 	<window width="960" height="540" fps="60" background="#1b1e2b" hardware="true" vsync="true" />
-	<window if="html5" resizable="true" />
+	<!-- Böngészőben a vászon mindig kitölti az ablakot (0x0 = a tartalom méretét követi) -->
+	<window if="html5" width="0" height="0" resizable="true" />
 	<window if="desktop" orientation="landscape" fullscreen="false" resizable="true" />
 
 	<source path="source" />
 
-	<haxelib name="flixel" />
+	<!-- Rögzített függőségek (telepítés: scripts/setup.ps1, VS Code: "Install dependencies" feladat) -->
+	<haxelib name="lime" version="8.3.2" />
+	<haxelib name="openfl" version="9.5.2" />
+	<haxelib name="flixel" version="6.2.1" />
 
 	<!-- Flixel debugger csak debug buildben (F2 / `) -->
 	<haxedef name="FLX_NO_DEBUG" unless="debug" />
