@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+	<meta title="Blockbuster" package="com.varadig.blockbuster" version="0.1.0" company="varadig" />
+	<app main="Main" file="Blockbuster" path="export" />
+
+	<window width="960" height="540" fps="60" background="#1b1e2b" hardware="true" vsync="true" />
+	<window if="html5" resizable="true" />
+	<window if="desktop" orientation="landscape" fullscreen="false" resizable="true" />
+
+	<source path="source" />
+
+	<haxelib name="flixel" />
+
+	<!-- Flixel debugger csak debug buildben (F2 / `) -->
+	<haxedef name="FLX_NO_DEBUG" unless="debug" />
+</project>
