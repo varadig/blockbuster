@@ -1,0 +1,130 @@
+{
+	"_readme": "Finomhangolási értékek. Leírás: docs/CONFIG.md. Módosítás után újra kell fordítani. Hiányzó kulcs = alapérték, tartományon kívüli érték a határra szorul.",
+
+	"player": {
+		"runSpeed": 200,
+		"followRatio": 1.35,
+		"jumpSpeed": 330,
+		"gravity": 900,
+		"maxEnergy": 100,
+		"hurtTime": 1.3,
+		"shootCooldown": 0.18,
+		"chargeTime": 1.0,
+		"chargeMin": 0.18
+	},
+
+	"scroll": {
+		"start": 60,
+		"max": 170,
+		"accel": 1.5,
+		"startGrace": 1.5
+	},
+
+	"damage": {
+		"meteorSmall": 15,
+		"meteorMedium": 30,
+		"meteorLarge": 50,
+		"fall": 30,
+		"enemyShot": 12,
+		"bomb": 20,
+		"bossContact": 25,
+		"meteorHot": 20
+	},
+
+	"powerups": {
+		"weaponTime": 12,
+		"energyRefill": 35,
+		"bonusPoints": 250
+	},
+
+	"weapons": {
+		"bulletSpeed": 420,
+		"laserSpeed": 900,
+		"rapidCooldown": 0.07,
+		"laserCooldown": 0.24,
+		"laserCooldownRapid": 0.1,
+		"rocketSpeed": 230,
+		"rocketCooldown": 0.55,
+		"rocketRadius": 30,
+		"rocketDamage": 4,
+		"grenadeSpeed": 190,
+		"grenadeCooldown": 0.8,
+		"grenadeRadius": 58,
+		"grenadeDamage": 5,
+		"rapidMul": 0.5,
+		"homingRange": 260,
+		"homingTurn": 15
+	},
+
+	"modifiers": {
+		"pixelTime": 12,
+		"asciiTime": 12,
+		"pixelBlock": 16,
+		"torchTime": 12,
+		"torchRadius": 48,
+		"ghostTime": 8,
+		"ghostAlpha": 0,
+		"viewTime": 10,
+		"viewMarginX": 0.2,
+		"viewMarginY": 0.2,
+		"tinyTime": 12,
+		"tinyScale": 0.55,
+		"magnetTime": 12,
+		"magnetForce": 110,
+		"magnetSpeed": 80,
+		"magnetRange": 260,
+		"weights": [24, 12, 12, 10, 10, 10, 12, 22],
+		"dropMeteor": 5,
+		"dropEnemy": 12,
+		"maxItems": 3
+	},
+
+	"spawning": {
+		"meteorIntervalStart": 1.3,
+		"meteorIntervalMin": 0.35,
+		"meteorIntervalDecay": 0.012,
+		"enemyUnlock": [20, 45, 75, 110],
+		"enemyIntervalStart": 6,
+		"enemyIntervalMin": 2,
+		"enemyShotSpeed": 130,
+		"bombRadius": 28,
+		"stompBounce": 260,
+		"hotMeteorChance": 18,
+		"hotMeteorTime": 4.5,
+		"slimeStickTime": 4,
+		"slimeSlow": 0.6,
+		"tipsyTime": 6,
+		"tipsyMax": 5
+	},
+
+	"shroom": {
+		"first": 30,
+		"intervalMin": 30,
+		"intervalMax": 60,
+		"tripTime": 7
+	},
+
+	"leaderboard": {
+		"url": "https://atmhfkkmmbwuzvazjaub.supabase.co",
+		"key": "sb_publishable_EJlRteHEwrWg5o5P_z_52w_c9cDh4es",
+		"table": "scores"
+	},
+
+	"game": {
+		"continues": 3,
+		"continueTime": 10
+	},
+
+	"boss": {
+		"baseHp": 110,
+		"hpPerLevel": 95
+	},
+
+	"difficulty": {
+		"scrollMul": [0.85, 1, 1.18],
+		"spawnIntervalMul": [1.35, 1, 0.75],
+		"damageMul": [0.6, 1, 1.4],
+		"rewardChance": [16, 12, 9],
+		"gapMul": [0.7, 1, 1.25]
+	}
+}

@@ -1,0 +1,502 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="1425" height="34" tilewidth="8" tileheight="8" infinite="0" nextlayerid="5" nextobjectid="137">
+  <editorsettings>
+    <export target="../assets/levels/07_glacier_night.json" format="json" />
+  </editorsettings>
+  <properties>
+    <property name="name" value="GLACIER NIGHT" />
+    <property name="theme" propertytype="ThemeKind" value="ICE" />
+    <property name="speed" type="float" value="1.45" />
+  </properties>
+  <objectgroup id="1" name="ground">
+    <object id="1" class="Ground" x="0" y="232" width="480" height="38" />
+    <object id="2" class="Ground" x="528" y="232" width="176" height="38" />
+    <object id="3" class="Ground" x="704" y="232" width="104" height="38" />
+    <object id="4" class="Ground" x="808" y="208" width="168" height="62" />
+    <object id="5" class="Ground" x="976" y="196" width="256" height="74" />
+    <object id="6" class="Ground" x="1232" y="184" width="144" height="86" />
+    <object id="7" class="Ground" x="1376" y="184" width="232" height="86" />
+    <object id="8" class="Ground" x="1608" y="184" width="80" height="86" />
+    <object id="9" class="Ground" x="1688" y="184" width="240" height="86" />
+    <object id="10" class="Ground" x="1928" y="196" width="176" height="74" />
+    <object id="11" class="Ground" x="2176" y="196" width="224" height="74" />
+    <object id="12" class="Ground" x="2400" y="196" width="216" height="74" />
+    <object id="13" class="Ground" x="2616" y="196" width="160" height="74" />
+    <object id="14" class="Ground" x="2776" y="184" width="208" height="86" />
+    <object id="15" class="Ground" x="2984" y="184" width="160" height="86" />
+    <object id="16" class="Ground" x="3144" y="184" width="120" height="86" />
+    <object id="17" class="Ground" x="3264" y="184" width="152" height="86" />
+    <object id="18" class="Ground" x="3416" y="184" width="232" height="86" />
+    <object id="19" class="Ground" x="3648" y="196" width="272" height="74" />
+    <object id="20" class="Ground" x="3920" y="184" width="208" height="86" />
+    <object id="21" class="Ground" x="4128" y="184" width="280" height="86" />
+    <object id="22" class="Ground" x="4408" y="184" width="248" height="86" />
+    <object id="23" class="Ground" x="4656" y="196" width="168" height="74" />
+    <object id="24" class="Ground" x="4824" y="220" width="264" height="50" />
+    <object id="25" class="Ground" x="5088" y="232" width="208" height="38" />
+    <object id="26" class="Ground" x="5296" y="232" width="200" height="38" />
+    <object id="27" class="Ground" x="5496" y="232" width="112" height="38" />
+    <object id="28" class="Ground" x="5608" y="220" width="88" height="50" />
+    <object id="29" class="Ground" x="5696" y="232" width="208" height="38" />
+    <object id="30" class="Ground" x="5904" y="220" width="240" height="50" />
+    <object id="31" class="Ground" x="6144" y="232" width="208" height="38" />
+    <object id="32" class="Ground" x="6352" y="232" width="272" height="38" />
+    <object id="33" class="Ground" x="6624" y="232" width="224" height="38" />
+    <object id="34" class="Ground" x="6848" y="216" width="32" height="54" />
+    <object id="35" class="Ground" x="6880" y="200" width="32" height="70" />
+    <object id="36" class="Ground" x="6912" y="184" width="32" height="86" />
+    <object id="37" class="Ground" x="6944" y="184" width="64" height="86" />
+    <object id="38" class="Ground" x="7008" y="184" width="96" height="86" />
+    <object id="39" class="Ground" x="7104" y="184" width="264" height="86" />
+    <object id="40" class="Ground" x="7368" y="184" width="160" height="86" />
+    <object id="41" class="Ground" x="7568" y="208" width="128" height="62" />
+    <object id="42" class="Ground" x="7696" y="232" width="88" height="38" />
+    <object id="43" class="Ground" x="7784" y="208" width="208" height="62" />
+    <object id="44" class="Ground" x="7992" y="208" width="240" height="62" />
+    <object id="45" class="Ground" x="8304" y="196" width="80" height="74" />
+    <object id="46" class="Ground" x="8384" y="196" width="240" height="74" />
+    <object id="47" class="Ground" x="8624" y="184" width="152" height="86" />
+    <object id="48" class="Ground" x="8776" y="184" width="248" height="86" />
+    <object id="49" class="Ground" x="9024" y="184" width="112" height="86" />
+    <object id="50" class="Ground" x="9136" y="184" width="160" height="86" />
+    <object id="51" class="Ground" x="9296" y="196" width="200" height="74" />
+    <object id="52" class="Ground" x="9496" y="220" width="248" height="50" />
+    <object id="53" class="Ground" x="9744" y="232" width="264" height="38" />
+    <object id="54" class="Ground" x="10008" y="232" width="152" height="38" />
+    <object id="55" class="Ground" x="10160" y="208" width="264" height="62" />
+    <object id="56" class="Ground" x="10424" y="220" width="976" height="50" />
+  </objectgroup>
+  <objectgroup id="2" name="platforms">
+    <object id="57" class="Platform" x="848" y="156" width="64" height="8" />
+    <object id="58" class="Platform" x="1960" y="152" width="48" height="8" />
+    <object id="59" class="Platform" x="2656" y="148" width="32" height="8" />
+    <object id="60" class="Platform" x="2816" y="144" width="48" height="8" />
+    <object id="61" class="Platform" x="3064" y="132" width="48" height="8" />
+    <object id="62" class="Platform" x="4008" y="144" width="48" height="8" />
+    <object id="63" class="Platform" x="4704" y="144" width="48" height="8" />
+    <object id="64" class="Platform" x="5520" y="192" width="56" height="8" />
+    <object id="65" class="Platform" x="5944" y="172" width="56" height="8" />
+    <object id="66" class="Platform" x="6248" y="192" width="56" height="8" />
+    <object id="67" class="Platform" x="7288" y="144" width="56" height="8" />
+    <object id="68" class="Platform" x="7624" y="156" width="40" height="8" />
+    <object id="69" class="Platform" x="8168" y="160" width="40" height="8" />
+    <object id="70" class="Platform" x="8512" y="156" width="32" height="8" />
+    <object id="71" class="Platform" x="8688" y="136" width="56" height="8" />
+    <object id="72" class="Platform" x="9072" y="136" width="40" height="8" />
+    <object id="73" class="Platform" x="9224" y="140" width="40" height="8" />
+    <object id="74" class="Platform" x="9592" y="172" width="48" height="8" />
+  </objectgroup>
+  <objectgroup id="3" name="spawns">
+    <object id="75" name="Start" class="Player" x="140" y="232">
+      <point />
+    </object>
+    <object id="76" name="Shower" class="Shower" x="700" y="0" width="2000" height="270">
+      <properties>
+        <property name="rate" type="float" value="1.5" />
+        <property name="goldEvery" type="int" value="5" />
+        <property name="reward" propertytype="RewardKind" value="RANDOM" />
+      </properties>
+    </object>
+    <object id="77" name="Shower" class="Shower" x="2725" y="0" width="1700" height="270">
+      <properties>
+        <property name="rate" type="float" value="1.6" />
+        <property name="goldEvery" type="int" value="5" />
+        <property name="reward" propertytype="RewardKind" value="RANDOM" />
+      </properties>
+    </object>
+    <object id="78" name="Shower" class="Shower" x="4750" y="0" width="1900" height="270">
+      <properties>
+        <property name="rate" type="float" value="1.6" />
+        <property name="goldEvery" type="int" value="5" />
+        <property name="reward" propertytype="RewardKind" value="RANDOM" />
+      </properties>
+    </object>
+    <object id="79" name="Shower" class="Shower" x="6775" y="0" width="2100" height="270">
+      <properties>
+        <property name="rate" type="float" value="1.7" />
+        <property name="goldEvery" type="int" value="5" />
+        <property name="reward" propertytype="RewardKind" value="RANDOM" />
+      </properties>
+    </object>
+    <object id="80" name="Shower" class="Shower" x="8800" y="0" width="1900" height="270">
+      <properties>
+        <property name="rate" type="float" value="1.7" />
+        <property name="goldEvery" type="int" value="5" />
+        <property name="reward" propertytype="RewardKind" value="RANDOM" />
+      </properties>
+    </object>
+    <object id="81" name="METEORFALL" class="Meteorfall" x="2600" y="232">
+      <properties>
+        <property name="count" type="int" value="19" />
+        <property name="goldEvery" type="int" value="6" />
+        <property name="span" type="float" value="520" />
+      </properties>
+      <point />
+    </object>
+    <object id="82" name="METEORFALL" class="Meteorfall" x="4900" y="232">
+      <properties>
+        <property name="count" type="int" value="19" />
+        <property name="goldEvery" type="int" value="6" />
+        <property name="span" type="float" value="520" />
+      </properties>
+      <point />
+    </object>
+    <object id="83" name="METEORFALL" class="Meteorfall" x="7200" y="232">
+      <properties>
+        <property name="count" type="int" value="19" />
+        <property name="goldEvery" type="int" value="6" />
+        <property name="span" type="float" value="520" />
+      </properties>
+      <point />
+    </object>
+    <object id="84" name="METEORFALL" class="Meteorfall" x="9500" y="232">
+      <properties>
+        <property name="count" type="int" value="19" />
+        <property name="goldEvery" type="int" value="6" />
+        <property name="span" type="float" value="520" />
+      </properties>
+      <point />
+    </object>
+    <object id="85" name="SLIME" class="Enemy" x="1104" y="196">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="SLIME" />
+        <property name="count" type="int" value="2" />
+        <property name="spacing" type="float" value="28" />
+      </properties>
+      <point />
+    </object>
+    <object id="86" name="TURRET" class="Enemy" x="1492" y="184">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="TURRET" />
+      </properties>
+      <point />
+    </object>
+    <object id="87" name="BAT" class="Enemy" x="2016" y="76">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="BAT" />
+      </properties>
+      <point />
+    </object>
+    <object id="88" name="TURRET" class="Enemy" x="2508" y="196">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="TURRET" />
+      </properties>
+      <point />
+    </object>
+    <object id="89" name="BAT" class="Enemy" x="2568" y="86">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="BAT" />
+        <property name="minDifficulty" type="int" value="2" />
+      </properties>
+      <point />
+    </object>
+    <object id="90" name="SLIME" class="Enemy" x="2696" y="196">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="SLIME" />
+        <property name="count" type="int" value="2" />
+        <property name="spacing" type="float" value="28" />
+      </properties>
+      <point />
+    </object>
+    <object id="91" name="BAT" class="Enemy" x="2756" y="86">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="BAT" />
+        <property name="minDifficulty" type="int" value="2" />
+      </properties>
+      <point />
+    </object>
+    <object id="92" name="SLIME" class="Enemy" x="2880" y="184">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="SLIME" />
+      </properties>
+      <point />
+    </object>
+    <object id="93" name="BAT" class="Enemy" x="3204" y="74">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="BAT" />
+      </properties>
+      <point />
+    </object>
+    <object id="94" name="SLIME" class="Enemy" x="3340" y="184">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="SLIME" />
+        <property name="count" type="int" value="2" />
+        <property name="spacing" type="float" value="28" />
+      </properties>
+      <point />
+    </object>
+    <object id="95" name="BAT" class="Enemy" x="3400" y="74">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="BAT" />
+        <property name="minDifficulty" type="int" value="2" />
+      </properties>
+      <point />
+    </object>
+    <object id="96" name="BAT" class="Enemy" x="4268" y="64">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="BAT" />
+      </properties>
+      <point />
+    </object>
+    <object id="97" name="DRONE" class="Enemy" x="4532" y="40">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="DRONE" />
+      </properties>
+      <point />
+    </object>
+    <object id="98" name="SLIME" class="Enemy" x="4740" y="196">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="SLIME" />
+        <property name="count" type="int" value="2" />
+        <property name="spacing" type="float" value="28" />
+      </properties>
+      <point />
+    </object>
+    <object id="99" name="DRONE" class="Enemy" x="4956" y="40">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="DRONE" />
+      </properties>
+      <point />
+    </object>
+    <object id="100" name="BAT" class="Enemy" x="5192" y="112">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="BAT" />
+      </properties>
+      <point />
+    </object>
+    <object id="101" name="BAT" class="Enemy" x="5552" y="142">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="BAT" />
+      </properties>
+      <point />
+    </object>
+    <object id="102" name="SLIME" class="Enemy" x="5652" y="220">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="SLIME" />
+      </properties>
+      <point />
+    </object>
+    <object id="103" name="SLIME" class="Enemy" x="6024" y="220">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="SLIME" />
+      </properties>
+      <point />
+    </object>
+    <object id="104" name="BAT" class="Enemy" x="6084" y="110">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="BAT" />
+        <property name="minDifficulty" type="int" value="2" />
+      </properties>
+      <point />
+    </object>
+    <object id="105" name="DRONE" class="Enemy" x="6248" y="40">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="DRONE" />
+      </properties>
+      <point />
+    </object>
+    <object id="106" name="BAT" class="Enemy" x="6488" y="152">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="BAT" />
+      </properties>
+      <point />
+    </object>
+    <object id="107" name="BAT" class="Enemy" x="6548" y="122">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="BAT" />
+        <property name="minDifficulty" type="int" value="2" />
+      </properties>
+      <point />
+    </object>
+    <object id="108" name="BAT" class="Enemy" x="6736" y="152">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="BAT" />
+      </properties>
+      <point />
+    </object>
+    <object id="109" name="SLIME" class="Enemy" x="6864" y="216">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="SLIME" />
+      </properties>
+      <point />
+    </object>
+    <object id="110" name="SLIME" class="Enemy" x="6896" y="200">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="SLIME" />
+        <property name="count" type="int" value="2" />
+        <property name="spacing" type="float" value="28" />
+      </properties>
+      <point />
+    </object>
+    <object id="111" name="BAT" class="Enemy" x="6956" y="90">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="BAT" />
+        <property name="minDifficulty" type="int" value="2" />
+      </properties>
+      <point />
+    </object>
+    <object id="112" name="DRONE" class="Enemy" x="6928" y="40">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="DRONE" />
+      </properties>
+      <point />
+    </object>
+    <object id="113" name="SLIME" class="Enemy" x="6976" y="184">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="SLIME" />
+      </properties>
+      <point />
+    </object>
+    <object id="114" name="BAT" class="Enemy" x="7236" y="104">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="BAT" />
+      </properties>
+      <point />
+    </object>
+    <object id="115" name="BAT" class="Enemy" x="7296" y="74">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="BAT" />
+        <property name="minDifficulty" type="int" value="2" />
+      </properties>
+      <point />
+    </object>
+    <object id="116" name="SLIME" class="Enemy" x="7448" y="184">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="SLIME" />
+      </properties>
+      <point />
+    </object>
+    <object id="117" name="DRONE" class="Enemy" x="7740" y="40">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="DRONE" />
+      </properties>
+      <point />
+    </object>
+    <object id="118" name="BAT" class="Enemy" x="8504" y="86">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="BAT" />
+      </properties>
+      <point />
+    </object>
+    <object id="119" name="BAT" class="Enemy" x="8564" y="86">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="BAT" />
+        <property name="minDifficulty" type="int" value="2" />
+      </properties>
+      <point />
+    </object>
+    <object id="120" name="SLIME" class="Enemy" x="8900" y="184">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="SLIME" />
+        <property name="count" type="int" value="2" />
+        <property name="spacing" type="float" value="28" />
+      </properties>
+      <point />
+    </object>
+    <object id="121" name="SLIME" class="Enemy" x="9080" y="184">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="SLIME" />
+      </properties>
+      <point />
+    </object>
+    <object id="122" name="BAT" class="Enemy" x="9140" y="74">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="BAT" />
+        <property name="minDifficulty" type="int" value="2" />
+      </properties>
+      <point />
+    </object>
+    <object id="123" name="SLIME" class="Enemy" x="9620" y="220">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="SLIME" />
+        <property name="count" type="int" value="2" />
+        <property name="spacing" type="float" value="28" />
+      </properties>
+      <point />
+    </object>
+    <object id="124" name="BAT" class="Enemy" x="9680" y="110">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="BAT" />
+        <property name="minDifficulty" type="int" value="2" />
+      </properties>
+      <point />
+    </object>
+    <object id="125" name="DRONE" class="Enemy" x="10292" y="40">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="DRONE" />
+      </properties>
+      <point />
+    </object>
+    <object id="126" name="ENERGY" class="Pickup" x="1500" y="176">
+      <properties>
+        <property name="kind" propertytype="PowerKind" value="ENERGY" />
+        <property name="floating" type="bool" value="true" />
+      </properties>
+      <point />
+    </object>
+    <object id="127" name="SPREAD" class="Pickup" x="2800" y="176">
+      <properties>
+        <property name="kind" propertytype="PowerKind" value="SPREAD" />
+        <property name="floating" type="bool" value="true" />
+      </properties>
+      <point />
+    </object>
+    <object id="128" name="RAPID" class="Pickup" x="4200" y="176">
+      <properties>
+        <property name="kind" propertytype="PowerKind" value="RAPID" />
+        <property name="floating" type="bool" value="true" />
+      </properties>
+      <point />
+    </object>
+    <object id="129" name="HOMING" class="Pickup" x="5600" y="224">
+      <properties>
+        <property name="kind" propertytype="PowerKind" value="HOMING" />
+        <property name="floating" type="bool" value="true" />
+      </properties>
+      <point />
+    </object>
+    <object id="130" name="ROCKET" class="Pickup" x="6900" y="192">
+      <properties>
+        <property name="kind" propertytype="PowerKind" value="ROCKET" />
+        <property name="floating" type="bool" value="true" />
+      </properties>
+      <point />
+    </object>
+    <object id="131" name="LASER" class="Pickup" x="9600" y="212">
+      <properties>
+        <property name="kind" propertytype="PowerKind" value="LASER" />
+        <property name="floating" type="bool" value="true" />
+      </properties>
+      <point />
+    </object>
+    <object id="132" name="Shroom" class="Shroom" x="2200" y="196">
+      <properties>
+        <property name="kind" value="TORCH" />
+      </properties>
+      <point />
+    </object>
+    <object id="133" name="Shroom" class="Shroom" x="4500" y="184">
+      <properties>
+        <property name="kind" value="GHOST" />
+      </properties>
+      <point />
+    </object>
+    <object id="134" name="Shroom" class="Shroom" x="6800" y="232">
+      <properties>
+        <property name="kind" value="TINYVIEW" />
+      </properties>
+      <point />
+    </object>
+    <object id="135" name="Shroom" class="Shroom" x="9200" y="184">
+      <properties>
+        <property name="kind" value="TINYHERO" />
+      </properties>
+      <point />
+    </object>
+  </objectgroup>
+  <objectgroup id="4" name="triggers">
+    <object id="136" name="Boss" class="Boss" x="10700" y="220">
+      <point />
+    </object>
+  </objectgroup>
+</map>

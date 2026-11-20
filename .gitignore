@@ -3,3 +3,11 @@ export/
 *.hl
 dist/
 tools/
+*.tiled-session
+
+logs/
+
+tests/out/
+tests/edge-cdp/
+.claude/settings.local.json
+.claude/scheduled_tasks.lock

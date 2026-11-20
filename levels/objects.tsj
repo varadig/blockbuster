@@ -1,0 +1,355 @@
+{
+	"type": "tileset",
+	"name": "objects",
+	"version": "1.10",
+	"tiledversion": "1.10.2",
+	"tilewidth": 56,
+	"tileheight": 26,
+	"tilecount": 27,
+	"columns": 0,
+	"margin": 0,
+	"spacing": 0,
+	"grid": {
+		"height": 1,
+		"orientation": "orthogonal",
+		"width": 1
+	},
+	"tiles": [
+		{
+			"id": 0,
+			"image": "sprites/player.png",
+			"imagewidth": 16,
+			"imageheight": 20,
+			"type": "Player"
+		},
+		{
+			"id": 1,
+			"image": "sprites/enemy_slime.png",
+			"imagewidth": 16,
+			"imageheight": 12,
+			"type": "Enemy",
+			"properties": [
+				{
+					"name": "kind",
+					"type": "string",
+					"value": "SLIME"
+				}
+			]
+		},
+		{
+			"id": 2,
+			"image": "sprites/enemy_bat.png",
+			"imagewidth": 16,
+			"imageheight": 10,
+			"type": "Enemy",
+			"properties": [
+				{
+					"name": "kind",
+					"type": "string",
+					"value": "BAT"
+				}
+			]
+		},
+		{
+			"id": 3,
+			"image": "sprites/enemy_turret.png",
+			"imagewidth": 14,
+			"imageheight": 14,
+			"type": "Enemy",
+			"properties": [
+				{
+					"name": "kind",
+					"type": "string",
+					"value": "TURRET"
+				}
+			]
+		},
+		{
+			"id": 4,
+			"image": "sprites/enemy_drone.png",
+			"imagewidth": 18,
+			"imageheight": 10,
+			"type": "Enemy",
+			"properties": [
+				{
+					"name": "kind",
+					"type": "string",
+					"value": "DRONE"
+				}
+			]
+		},
+		{
+			"id": 5,
+			"image": "sprites/pickup_spread.png",
+			"imagewidth": 12,
+			"imageheight": 12,
+			"type": "Pickup",
+			"properties": [
+				{
+					"name": "kind",
+					"type": "string",
+					"value": "SPREAD"
+				}
+			]
+		},
+		{
+			"id": 6,
+			"image": "sprites/pickup_rapid.png",
+			"imagewidth": 12,
+			"imageheight": 12,
+			"type": "Pickup",
+			"properties": [
+				{
+					"name": "kind",
+					"type": "string",
+					"value": "RAPID"
+				}
+			]
+		},
+		{
+			"id": 7,
+			"image": "sprites/pickup_homing.png",
+			"imagewidth": 12,
+			"imageheight": 12,
+			"type": "Pickup",
+			"properties": [
+				{
+					"name": "kind",
+					"type": "string",
+					"value": "HOMING"
+				}
+			]
+		},
+		{
+			"id": 8,
+			"image": "sprites/pickup_rocket.png",
+			"imagewidth": 12,
+			"imageheight": 12,
+			"type": "Pickup",
+			"properties": [
+				{
+					"name": "kind",
+					"type": "string",
+					"value": "ROCKET"
+				}
+			]
+		},
+		{
+			"id": 9,
+			"image": "sprites/pickup_laser.png",
+			"imagewidth": 12,
+			"imageheight": 12,
+			"type": "Pickup",
+			"properties": [
+				{
+					"name": "kind",
+					"type": "string",
+					"value": "LASER"
+				}
+			]
+		},
+		{
+			"id": 10,
+			"image": "sprites/pickup_grenade.png",
+			"imagewidth": 12,
+			"imageheight": 12,
+			"type": "Pickup",
+			"properties": [
+				{
+					"name": "kind",
+					"type": "string",
+					"value": "GRENADE"
+				}
+			]
+		},
+		{
+			"id": 11,
+			"image": "sprites/pickup_bonus.png",
+			"imagewidth": 12,
+			"imageheight": 12,
+			"type": "Pickup",
+			"properties": [
+				{
+					"name": "kind",
+					"type": "string",
+					"value": "BONUS"
+				}
+			]
+		},
+		{
+			"id": 12,
+			"image": "sprites/pickup_energy.png",
+			"imagewidth": 12,
+			"imageheight": 12,
+			"type": "Pickup",
+			"properties": [
+				{
+					"name": "kind",
+					"type": "string",
+					"value": "ENERGY"
+				}
+			]
+		},
+		{
+			"id": 13,
+			"image": "sprites/shroom.png",
+			"imagewidth": 10,
+			"imageheight": 10,
+			"type": "Shroom"
+		},
+		{
+			"id": 14,
+			"image": "sprites/shroom_shroom.png",
+			"imagewidth": 12,
+			"imageheight": 12,
+			"type": "Shroom",
+			"properties": [
+				{
+					"name": "kind",
+					"type": "string",
+					"value": "SHROOM"
+				}
+			]
+		},
+		{
+			"id": 15,
+			"image": "sprites/shroom_pixel.png",
+			"imagewidth": 12,
+			"imageheight": 12,
+			"type": "Shroom",
+			"properties": [
+				{
+					"name": "kind",
+					"type": "string",
+					"value": "PIXEL"
+				}
+			]
+		},
+		{
+			"id": 16,
+			"image": "sprites/shroom_torch.png",
+			"imagewidth": 12,
+			"imageheight": 12,
+			"type": "Shroom",
+			"properties": [
+				{
+					"name": "kind",
+					"type": "string",
+					"value": "TORCH"
+				}
+			]
+		},
+		{
+			"id": 17,
+			"image": "sprites/shroom_ghost.png",
+			"imagewidth": 12,
+			"imageheight": 12,
+			"type": "Shroom",
+			"properties": [
+				{
+					"name": "kind",
+					"type": "string",
+					"value": "GHOST"
+				}
+			]
+		},
+		{
+			"id": 18,
+			"image": "sprites/shroom_tinyview.png",
+			"imagewidth": 12,
+			"imageheight": 12,
+			"type": "Shroom",
+			"properties": [
+				{
+					"name": "kind",
+					"type": "string",
+					"value": "TINYVIEW"
+				}
+			]
+		},
+		{
+			"id": 19,
+			"image": "sprites/shroom_tinyhero.png",
+			"imagewidth": 12,
+			"imageheight": 12,
+			"type": "Shroom",
+			"properties": [
+				{
+					"name": "kind",
+					"type": "string",
+					"value": "TINYHERO"
+				}
+			]
+		},
+		{
+			"id": 20,
+			"image": "sprites/shroom_magnet.png",
+			"imagewidth": 12,
+			"imageheight": 12,
+			"type": "Shroom",
+			"properties": [
+				{
+					"name": "kind",
+					"type": "string",
+					"value": "MAGNET"
+				}
+			]
+		},
+		{
+			"id": 21,
+			"image": "sprites/shroom_ascii.png",
+			"imagewidth": 12,
+			"imageheight": 12,
+			"type": "Shroom",
+			"properties": [
+				{
+					"name": "kind",
+					"type": "string",
+					"value": "ASCII"
+				}
+			]
+		},
+		{
+			"id": 22,
+			"image": "sprites/meteor.png",
+			"imagewidth": 16,
+			"imageheight": 16,
+			"type": "Meteor"
+		},
+		{
+			"id": 23,
+			"image": "sprites/meteor_gold.png",
+			"imagewidth": 16,
+			"imageheight": 16,
+			"type": "Meteor",
+			"properties": [
+				{
+					"name": "reward",
+					"type": "string",
+					"value": "RANDOM"
+				}
+			]
+		},
+		{
+			"id": 24,
+			"image": "sprites/meteorfall.png",
+			"imagewidth": 16,
+			"imageheight": 16,
+			"type": "Meteorfall"
+		},
+		{
+			"id": 25,
+			"image": "sprites/boss.png",
+			"imagewidth": 56,
+			"imageheight": 26,
+			"type": "Boss"
+		},
+		{
+			"id": 26,
+			"image": "sprites/end.png",
+			"imagewidth": 14,
+			"imageheight": 24,
+			"type": "End"
+		}
+	]
+}

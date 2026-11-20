@@ -1,4 +1,4 @@
-﻿# Normál (nem teszt) HTML5 build, majd itch.io-ra feltölthető zip: dist/blockbuster-html5.zip
+﻿# Normál (nem teszt) HTML5 build, majd itch.io-ra feltölthető zip: dist/moonshard-html5.zip
 # Az index.html a zip gyökerébe kerül, ahogy az itch.io elvárja.
 
 $ErrorActionPreference = "Stop"
@@ -9,11 +9,13 @@ $env:HAXEPATH = "C:\HaxeToolkit\haxe"
 $env:NEKO_INSTPATH = "C:\HaxeToolkit\neko"
 $env:Path = "C:\HaxeToolkit\haxe;C:\HaxeToolkit\neko;$env:Path"
 
+# A korábbi (más nevű) build maradék .js fájljai ne kerüljenek a zip-be (pl. a régi Blockbuster.js)
+Get-ChildItem (Join-Path $root "export\html5\bin") -Filter *.js -ErrorAction SilentlyContinue | Remove-Item -Force
 & haxelib run lime build html5
 if ($LASTEXITCODE -ne 0) { throw "A build nem sikerült." }
 
 New-Item -ItemType Directory -Force dist | Out-Null
-$zip = Join-Path $root "dist\blockbuster-html5.zip"
+$zip = Join-Path $root "dist\moonshard-html5.zip"
 if (Test-Path $zip) { Remove-Item $zip }
 # A Windows beépített tar-ja szabványos (perjeles útvonalú) zip-et készít
 & "$env:SystemRoot\System32\tar.exe" -a -c -f $zip -C "export\html5\bin" *

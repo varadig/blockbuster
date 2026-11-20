@@ -28,7 +28,10 @@ class TitleState extends FlxState
 	override public function create():Void
 	{
 		super.create();
+		Config.load();
+		Settings.load();
 		bgColor = PixelArt.OUTLINE;
+		Themes.current = Themes.NIGHT; // a címképernyő és a karakterválasztó az alap éjszakai témát használja
 		FlxG.timeScale = 1;
 		FlxG.fixedTimestep = false; // valós idő szerinti léptetés (lásd PlayState)
 		FlxG.maxElapsed = 0.05;
@@ -56,7 +59,7 @@ class TitleState extends FlxState
 
 		// Futó hős a képernyő bal oldalán
 		var hero = new FlxSprite(70, GROUND_Y - PixelArt.PLAYER_H);
-		hero.loadGraphic(PixelArt.player(), true, PixelArt.PLAYER_W, PixelArt.PLAYER_H);
+		hero.loadGraphic(PixelArt.player(Characters.current().skin), true, PixelArt.PLAYER_W, PixelArt.PLAYER_H);
 		hero.animation.add("run", [1, 2, 3, 4], 12);
 		hero.animation.play("run");
 		hero.scrollFactor.set(0, 0);
@@ -72,20 +75,18 @@ class TitleState extends FlxState
 		styleText(tagline, PixelArt.CYAN);
 		add(tagline);
 
-		menu = new MenuList(86, [() -> "START GAME", () -> "QUESTS", () -> "SETTINGS"], 16, 19);
+		menu = new MenuList(86, [() -> "START GAME", () -> "QUESTS", () -> 'SHOP   ${Settings.coins} COINS', () -> "HELP"].concat(Leaderboard.configured() ? [() -> "LEADERBOARD"] : []).concat([() -> "SETTINGS"]), Leaderboard.configured() ? 14 : 16, Leaderboard.configured() ? 15 : 17);
 		menu.onSelect = i -> switch (i)
 		{
 			case 0: startGame();
 			case 1: Audio.play("blip"); openSubState(new QuestsSubState());
+			case 2: Audio.play("blip"); openSubState(new ShopSubState(false));
+			case 3: Audio.play("blip"); openSubState(new HelpSubState());
+			case 4 if (Leaderboard.configured()): Audio.play("blip"); openSubState(new LeaderboardSubState());
 			default: openSettings();
 		};
 		add(menu);
 
-		var controls = new FlxText(0, 152, FlxG.width,
-			"ARROWS  run        ALT  jump        SPACE  shoot\n" + "UP + SPACE  shoot up      UP + FORWARD + SPACE  diagonal\n"
-			+ "P  pause        M  mute        F  fullscreen", 8);
-		styleText(controls, PixelArt.LIGHT_GRAY);
-		add(controls);
 
 		hiText = new FlxText(0, 6, FlxG.width, "", 8);
 		styleText(hiText, PixelArt.WHITE);
@@ -113,9 +114,11 @@ class TitleState extends FlxState
 	function startGame():Void
 	{
 		starting = true;
+		Leaderboard.cheated = false; // új futás: a cheat-jelölés törlődik
+		Settings.resetRun(); // minden új futás tiszta lappal indul (akkor is, ha az előző a böngésző bezárásával ért véget)
 		Audio.play("start");
 		FlxG.camera.flash(0x60ffffff, 0.2);
-		FlxG.camera.fade(PixelArt.OUTLINE, 0.6, false, () -> FlxG.switchState(PlayState.new));
+		FlxG.camera.fade(PixelArt.OUTLINE, 0.6, false, () -> FlxG.switchState(IntroState.new), true); // force: a nyitó fade-in közben is lefusson
 	}
 
 	function styleText(t:FlxText, color:FlxColor):Void
@@ -129,7 +132,7 @@ class TitleState extends FlxState
 	/** A logó betűi egymás után beesnek és lepattannak. */
 	function createLogo():Void
 	{
-		var word = "BLOCKBUSTER";
+		var word = "MOONSHARD";
 		var letterW = 5 * PixelArt.LOGO_CELL;
 		var gap = 3;
 		var totalW = word.length * letterW + (word.length - 1) * gap;
@@ -178,7 +181,7 @@ class TitleState extends FlxState
 		if (FlxG.keys.justPressed.F)
 			FlxG.fullscreen = !FlxG.fullscreen;
 		#end
-		if (FlxG.keys.justPressed.M)
+		if (Controls.just(MUTE))
 			Settings.toggleMute();
 
 		super.update(elapsed);

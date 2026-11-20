@@ -1,0 +1,364 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="1500" height="34" tilewidth="8" tileheight="8" infinite="0" nextlayerid="6" nextobjectid="152">
+  <editorsettings>
+    <export target="../assets/levels/02_ashen_valley.json" format="json" />
+  </editorsettings>
+  <properties>
+    <property name="name" value="ASHEN VALLEY" />
+    <property name="theme" propertytype="ThemeKind" value="ASH" />
+    <property name="speed" type="float" value="1.12" />
+  </properties>
+  <tileset firstgid="1" source="objects.tsj" />
+  <imagelayer id="5" name="terrain preview (auto - refresh: tiled-previews)" locked="1">
+    <image source="previews/02_ashen_valley.png" width="12200" height="270" />
+  </imagelayer>
+  <objectgroup id="1" name="ground">
+    <object id="1" class="Ground" x="0" y="232" width="480" height="38" />
+    <object id="2" class="Ground" x="480" y="232" width="168" height="38" />
+    <object id="3" class="Ground" x="648" y="232" width="176" height="38" />
+    <object id="4" class="Ground" x="904" y="232" width="216" height="38" />
+    <object id="7" class="Ground" x="1600" y="220" width="224" height="50" />
+    <object id="8" class="Ground" x="1824" y="232" width="88" height="38" />
+    <object id="12" class="Ground" x="2448" y="208" width="200" height="62" />
+    <object id="13" class="Ground" x="2696" y="196" width="80" height="74" />
+    <object id="14" class="Ground" x="2824" y="196" width="224" height="74" />
+    <object id="15" class="Ground" x="3088" y="196" width="216" height="74" />
+    <object id="16" class="Ground" x="3344" y="196" width="88" height="74" />
+    <object id="17" class="Ground" x="3504" y="208" width="120" height="62" />
+    <object id="18" class="Ground" x="3624" y="196" width="160" height="74" />
+    <object id="19" class="Ground" x="3784" y="196" width="120" height="74" />
+    <object id="20" class="Ground" x="3944" y="220" width="200" height="50" />
+    <object id="21" class="Ground" x="4144" y="208" width="200" height="62" />
+    <object id="22" class="Ground" x="4400" y="196" width="240" height="74" />
+    <object id="23" class="Ground" x="4712" y="196" width="112" height="74" />
+    <object id="24" class="Ground" x="4904" y="220" width="104" height="50" />
+    <object id="25" class="Ground" x="5008" y="220" width="184" height="50" />
+    <object id="26" class="Ground" x="5192" y="208" width="104" height="62" />
+    <object id="27" class="Ground" x="5296" y="196" width="144" height="74" />
+    <object id="28" class="Ground" x="5504" y="196" width="80" height="74" />
+    <object id="29" class="Ground" x="5584" y="196" width="80" height="74" />
+    <object id="30" class="Ground" x="5664" y="196" width="128" height="74" />
+    <object id="31" class="Ground" x="5832" y="220" width="88" height="50" />
+    <object id="32" class="Ground" x="5920" y="196" width="96" height="74" />
+    <object id="33" class="Ground" x="6056" y="208" width="80" height="62" />
+    <object id="34" class="Ground" x="6136" y="196" width="176" height="74" />
+    <object id="35" class="Ground" x="6384" y="208" width="152" height="62" />
+    <object id="36" class="Ground" x="6536" y="208" width="168" height="62" />
+    <object id="37" class="Ground" x="6760" y="196" width="120" height="74" />
+    <object id="38" class="Ground" x="6880" y="196" width="240" height="74" />
+    <object id="39" class="Ground" x="7192" y="196" width="104" height="74" />
+    <object id="40" class="Ground" x="7296" y="220" width="200" height="50" />
+    <object id="41" class="Ground" x="7496" y="232" width="152" height="38" />
+    <object id="43" class="Ground" x="7880" y="196" width="144" height="74" />
+    <object id="44" class="Ground" x="8024" y="220" width="232" height="50" />
+    <object id="46" class="Ground" x="8544" y="196" width="184" height="74" />
+    <object id="47" class="Ground" x="8728" y="220" width="216" height="50" />
+    <object id="48" class="Ground" x="8944" y="232" width="104" height="38" />
+    <object id="49" class="Ground" x="9048" y="232" width="128" height="38" />
+    <object id="50" class="Ground" x="9176" y="232" width="80" height="38" />
+    <object id="51" class="Ground" x="9304" y="232" width="120" height="38" />
+    <object id="52" class="Ground" x="9424" y="232" width="80" height="38" />
+    <object id="53" class="Ground" x="9560" y="232" width="240" height="38" />
+    <object id="54" class="Ground" x="9880" y="220" width="88" height="50" />
+    <object id="55" class="Ground" x="10008" y="232" width="208" height="38" />
+    <object id="56" class="Ground" x="10216" y="232" width="88" height="38" />
+    <object id="58" class="Ground" x="10616" y="220" width="128" height="50" />
+    <object id="59" class="Ground" x="10744" y="220" width="232" height="50" />
+    <object id="60" class="Ground" x="10976" y="220" width="1224" height="50" />
+    <object id="113" class="Ground" x="1176" y="232" width="32" height="38" />
+    <object id="114" class="Ground" x="1208" y="208" width="40" height="62" />
+    <object id="115" class="Ground" x="1248" y="232" width="80" height="38" />
+    <object id="116" class="Ground" x="1384" y="220" width="48" height="50" />
+    <object id="117" class="Ground" x="1432" y="204" width="32" height="66" />
+    <object id="118" class="Ground" x="1464" y="188" width="32" height="82" />
+    <object id="119" class="Ground" x="1496" y="220" width="56" height="50" />
+    <object id="120" class="Ground" x="1912" y="232" width="56" height="38" />
+    <object id="121" class="Ground" x="2048" y="232" width="56" height="38" />
+    <object id="123" class="Ground" x="2104" y="232" width="56" height="38" />
+    <object id="124" class="Ground" x="2160" y="208" width="40" height="62" />
+    <object id="125" class="Ground" x="2200" y="232" width="80" height="38" />
+    <object id="126" class="Ground" x="2280" y="232" width="48" height="38" />
+    <object id="127" class="Ground" x="2328" y="216" width="32" height="54" />
+    <object id="128" class="Ground" x="2360" y="200" width="32" height="70" />
+    <object id="129" class="Ground" x="2392" y="232" width="56" height="38" />
+    <object id="130" class="Ground" x="7648" y="208" width="32" height="62" />
+    <object id="131" class="Ground" x="7680" y="184" width="40" height="86" />
+    <object id="132" class="Ground" x="7720" y="208" width="88" height="62" />
+    <object id="133" class="Ground" x="8296" y="208" width="48" height="62" />
+    <object id="134" class="Ground" x="8344" y="192" width="32" height="78" />
+    <object id="135" class="Ground" x="8376" y="176" width="32" height="94" />
+    <object id="136" class="Ground" x="8408" y="208" width="64" height="62" />
+    <object id="137" class="Ground" x="10368" y="220" width="72" height="50" />
+    <object id="138" class="Ground" x="10440" y="204" width="32" height="66" />
+    <object id="139" class="Ground" x="10472" y="188" width="32" height="82" />
+    <object id="140" class="Ground" x="10504" y="220" width="64" height="50" />
+  </objectgroup>
+  <objectgroup id="2" name="platforms">
+    <object id="61" class="Platform" x="712" y="176" width="56" height="8" />
+    <object id="62" class="Platform" x="1416" y="164" width="40" height="8" />
+    <object id="63" class="Platform" x="2536" y="168" width="56" height="8" />
+    <object id="64" class="Platform" x="2824" y="140" width="48" height="8" />
+    <object id="65" class="Platform" x="3504" y="160" width="56" height="8" />
+    <object id="66" class="Platform" x="3840" y="148" width="64" height="8" />
+    <object id="67" class="Platform" x="5672" y="148" width="40" height="8" />
+    <object id="68" class="Platform" x="7312" y="172" width="48" height="8" />
+    <object id="69" class="Platform" x="7672" y="148" width="48" height="8" />
+    <object id="70" class="Platform" x="7928" y="156" width="32" height="8" />
+    <object id="71" class="Platform" x="8312" y="152" width="56" height="8" />
+    <object id="72" class="Platform" x="8792" y="164" width="32" height="8" />
+    <object id="73" class="Platform" x="9352" y="176" width="64" height="8" />
+    <object id="74" class="Platform" x="9576" y="184" width="48" height="8" />
+    <object id="122" class="Platform" x="1984" y="184" width="48" height="8" />
+  </objectgroup>
+  <objectgroup id="3" name="spawns">
+    <object id="75" name="Start" class="Player" gid="1" x="132" y="232" width="16" height="20" />
+    <object id="76" name="Shower" class="Shower" x="500" y="0" width="2000" height="270">
+      <properties>
+        <property name="rate" type="float" value="0.9" />
+        <property name="goldEvery" type="int" value="0" />
+        <property name="reward" propertytype="RewardKind" value="RANDOM" />
+      </properties>
+    </object>
+    <object id="77" name="Shower" class="Shower" x="3200" y="0" width="2000" height="270">
+      <properties>
+        <property name="rate" type="float" value="1.2" />
+        <property name="goldEvery" type="int" value="5" />
+        <property name="reward" propertytype="RewardKind" value="RANDOM" />
+      </properties>
+    </object>
+    <object id="78" name="Shower" class="Shower" x="6000" y="0" width="2200" height="270">
+      <properties>
+        <property name="rate" type="float" value="1.5" />
+        <property name="goldEvery" type="int" value="5" />
+        <property name="reward" propertytype="RewardKind" value="RANDOM" />
+      </properties>
+    </object>
+    <object id="79" name="Shower" class="Shower" x="8800" y="0" width="1800" height="270">
+      <properties>
+        <property name="rate" type="float" value="1.7" />
+        <property name="goldEvery" type="int" value="4" />
+        <property name="reward" propertytype="RewardKind" value="RANDOM" />
+      </properties>
+    </object>
+    <object id="80" name="SLIME" class="Enemy" gid="2" x="1004" y="232" width="16" height="12">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="SLIME" />
+      </properties>
+    </object>
+    <object id="81" name="BAT" class="Enemy" gid="3" x="1704" y="138" width="16" height="10">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="BAT" />
+      </properties>
+    </object>
+    <object id="82" name="SLIME" class="Enemy" gid="2" x="1860" y="232" width="16" height="12">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="SLIME" />
+      </properties>
+    </object>
+    <object id="83" name="TURRET" class="Enemy" gid="4" x="2929" y="196" width="14" height="14">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="TURRET" />
+      </properties>
+    </object>
+    <object id="84" name="SLIME" class="Enemy" gid="2" x="3188" y="196" width="16" height="12">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="SLIME" />
+      </properties>
+    </object>
+    <object id="85" name="BAT" class="Enemy" gid="3" x="3696" y="146" width="16" height="10">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="BAT" />
+      </properties>
+    </object>
+    <object id="86" name="SLIME" class="Enemy" gid="2" x="4512" y="196" width="16" height="12">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="SLIME" />
+      </properties>
+    </object>
+    <object id="87" name="BAT" class="Enemy" gid="3" x="5092" y="114" width="16" height="10">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="BAT" />
+      </properties>
+    </object>
+    <object id="88" name="TURRET" class="Enemy" gid="4" x="5537" y="196" width="14" height="14">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="TURRET" />
+      </properties>
+    </object>
+    <object id="89" name="SLIME" class="Enemy" gid="2" x="6452" y="208" width="16" height="12">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="SLIME" />
+      </properties>
+    </object>
+    <object id="90" name="DRONE" class="Enemy" gid="5" x="6991" y="40" width="18" height="10">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="DRONE" />
+      </properties>
+    </object>
+    <object id="91" name="TURRET" class="Enemy" gid="4" x="7237" y="196" width="14" height="14">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="TURRET" />
+      </properties>
+    </object>
+    <object id="92" name="BAT" class="Enemy" gid="3" x="7564" y="114" width="16" height="10">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="BAT" />
+        <property name="minDifficulty" type="int" value="2" />
+      </properties>
+    </object>
+    <object id="93" name="DRONE" class="Enemy" gid="5" x="8131" y="40" width="18" height="10">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="DRONE" />
+      </properties>
+    </object>
+    <object id="94" name="SLIME" class="Enemy" gid="2" x="8628" y="196" width="16" height="12">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="SLIME" />
+        <property name="count" type="int" value="3" />
+        <property name="spacing" type="float" value="32" />
+      </properties>
+    </object>
+    <object id="95" name="BAT" class="Enemy" gid="3" x="9104" y="122" width="16" height="10">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="BAT" />
+      </properties>
+    </object>
+    <object id="96" name="DRONE" class="Enemy" gid="5" x="9671" y="40" width="18" height="10">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="DRONE" />
+      </properties>
+    </object>
+    <object id="97" name="TURRET" class="Enemy" gid="4" x="9917" y="220" width="14" height="14">
+      <properties>
+        <property name="kind" propertytype="EnemyKind" value="TURRET" />
+      </properties>
+    </object>
+    <object id="98" name="HEAVY" class="Pickup" gid="11" x="1706" y="202" width="12" height="12">
+      <properties>
+        <property name="kind" propertytype="PowerKind" value="GRENADE" />
+        <property name="floating" type="bool" value="true" />
+      </properties>
+    </object>
+    <object id="99" name="FLAME" class="Pickup" gid="9" x="3190" y="178" width="12" height="12">
+      <properties>
+        <property name="kind" propertytype="PowerKind" value="ROCKET" />
+        <property name="floating" type="bool" value="true" />
+      </properties>
+    </object>
+    <object id="100" name="ENERGY" class="Pickup" gid="13" x="4238" y="190" width="12" height="12">
+      <properties>
+        <property name="kind" propertytype="PowerKind" value="ENERGY" />
+        <property name="floating" type="bool" value="true" />
+      </properties>
+    </object>
+    <object id="101" name="DEATHRAY" class="Pickup" gid="10" x="5722" y="178" width="12" height="12">
+      <properties>
+        <property name="kind" propertytype="PowerKind" value="LASER" />
+        <property name="floating" type="bool" value="true" />
+      </properties>
+    </object>
+    <object id="102" name="SHIELD" class="Pickup" gid="13" x="7390" y="202" width="12" height="12">
+      <properties>
+        <property name="kind" propertytype="PowerKind" value="ENERGY" />
+        <property name="floating" type="bool" value="true" />
+      </properties>
+    </object>
+    <object id="103" name="SLOWMO" class="Pickup" gid="8" x="8630" y="178" width="12" height="12">
+      <properties>
+        <property name="kind" propertytype="PowerKind" value="HOMING" />
+        <property name="floating" type="bool" value="true" />
+      </properties>
+    </object>
+    <object id="104" name="ENERGY" class="Pickup" gid="13" x="10106" y="214" width="12" height="12">
+      <properties>
+        <property name="kind" propertytype="PowerKind" value="ENERGY" />
+        <property name="floating" type="bool" value="true" />
+      </properties>
+    </object>
+    <object id="105" name="Gold meteor" class="Meteor" gid="24" x="1992" y="8" width="16" height="16">
+      <properties>
+        <property name="reward" propertytype="RewardKind" value="RANDOM" />
+        <property name="speed" type="float" value="100" />
+      </properties>
+    </object>
+    <object id="106" name="Gold meteor" class="Meteor" gid="24" x="4792" y="8" width="16" height="16">
+      <properties>
+        <property name="reward" propertytype="RewardKind" value="RANDOM" />
+        <property name="speed" type="float" value="100" />
+      </properties>
+    </object>
+    <object id="107" name="Gold meteor" class="Meteor" gid="24" x="6592" y="8" width="16" height="16">
+      <properties>
+        <property name="reward" propertytype="RewardKind" value="RANDOM" />
+        <property name="speed" type="float" value="100" />
+      </properties>
+    </object>
+    <object id="108" name="Gold meteor" class="Meteor" gid="24" x="9192" y="8" width="16" height="16">
+      <properties>
+        <property name="reward" propertytype="RewardKind" value="RANDOM" />
+        <property name="speed" type="float" value="100" />
+      </properties>
+    </object>
+    <object id="109" name="Shroom" class="Shroom" gid="14" x="3559" y="208" width="10" height="10" />
+    <object id="110" name="Shroom" class="Shroom" gid="14" x="6615" y="208" width="10" height="10" />
+    <object id="111" name="Shroom" class="Shroom" gid="14" x="9919" y="220" width="10" height="10" />
+    <object id="141" name="METEORFALL" class="Meteorfall" gid="25" x="3104.5" y="240" width="16" height="16">
+      <properties>
+        <property name="count" type="int" value="15" />
+        <property name="goldEvery" type="int" value="6" />
+        <property name="span" type="float" value="520" />
+      </properties>
+    </object>
+    <object id="142" name="METEORFALL" class="Meteorfall" gid="25" x="5329.5" y="240" width="16" height="16">
+      <properties>
+        <property name="count" type="int" value="14" />
+        <property name="goldEvery" type="int" value="6" />
+        <property name="span" type="float" value="520" />
+      </properties>
+    </object>
+    <object id="143" name="METEORFALL" class="Meteorfall" gid="25" x="7554.5" y="240" width="16" height="16">
+      <properties>
+        <property name="count" type="int" value="17" />
+        <property name="goldEvery" type="int" value="6" />
+        <property name="span" type="float" value="520" />
+      </properties>
+    </object>
+    <object id="144" name="METEORFALL" class="Meteorfall" gid="25" x="9779.5" y="240" width="16" height="16">
+      <properties>
+        <property name="count" type="int" value="19" />
+        <property name="goldEvery" type="int" value="6" />
+        <property name="span" type="float" value="520" />
+      </properties>
+    </object>
+    <object id="145" name="DRONE" class="Enemy" gid="5" x="5701" y="85" width="18" height="10">
+      <properties>
+        <property name="kind" value="DRONE" />
+      </properties>
+    </object>
+    <object id="146" name="BAT" class="Enemy" gid="3" x="8074" y="117" width="16" height="10">
+      <properties>
+        <property name="kind" value="BAT" />
+      </properties>
+    </object>
+    <object id="147" name="SLIME" class="Enemy" gid="2" x="8620" y="196" width="16" height="12">
+      <properties>
+        <property name="kind" value="SLIME" />
+      </properties>
+    </object>
+    <object id="148" name="DRONE" class="Enemy" gid="5" x="9633" y="117" width="18" height="10">
+      <properties>
+        <property name="kind" value="DRONE" />
+      </properties>
+    </object>
+    <object id="149" name="TURRET" class="Enemy" gid="4" x="10894" y="220" width="14" height="14">
+      <properties>
+        <property name="kind" value="TURRET" />
+      </properties>
+    </object>
+    <object id="150" name="Shroom" class="Shroom" gid="14" x="4073" y="220" width="10" height="10" />
+    <object id="151" name="Shroom" class="Shroom" gid="14" x="7564" y="232" width="10" height="10" />
+  </objectgroup>
+  <objectgroup id="4" name="triggers">
+    <object id="112" name="Boss" class="Boss" gid="26" x="11300" y="232" width="56" height="26" />
+  </objectgroup>
+</map>

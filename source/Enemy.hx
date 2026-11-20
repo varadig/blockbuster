@@ -15,6 +15,8 @@ enum abstract EnemyKind(Int) to Int
 	var TURRET = 2;
 	/** A hős fölött lebeg és bombákat dob, aztán elrepül. */
 	var DRONE = 3;
+	/** A pók főellenség kicsinyei: követik a hőst a talajon, a csípésük "tipsy" hatást ad. Csak a főellenség hívja (nincs a spawn-listán). */
+	var SPIDERLING = 4;
 }
 
 class Enemy extends FlxSprite
@@ -35,6 +37,14 @@ class Enemy extends FlxSprite
 	/** Lövés/bombadobás kérése a PlayState felé: (ellenség, 0 = lövedék, 1 = bomba). */
 	public var onFire:(Enemy, Int)->Void;
 
+	/** A slime a hősre tapadt: nem sebez, hanem lassítja, és `Config.slimeStickTime` múlva leesik. */
+	public var stuck(default, null):Bool = false;
+	/** Egy ráragadt slime lepottyanása (a PlayState fröcskölést rajzol). */
+	public static var onDetach:Enemy->Void;
+
+	var life:Float = 0;
+	var stuckTimer:Float = 0;
+	var stuckSlot:Int = 0;
 	var timer:Float = 0;
 	var t:Float = 0;
 	var baseY:Float = 0;
@@ -52,6 +62,7 @@ class Enemy extends FlxSprite
 		this.kind = kind;
 		t = 0;
 		diving = false;
+		stuck = false;
 		flashTimer = 0;
 		fireFlash = 0;
 		setColorTransform();
@@ -68,7 +79,7 @@ class Enemy extends FlxSprite
 				hp = 2;
 				stompable = true;
 				usesGround = true;
-				contactDamage = 15;
+				contactDamage = 0; // nem sebez: ráragad a hősre és lelassítja
 				points = 50;
 				baseColor = 0xffb05cd6;
 				acceleration.y = 600;
@@ -93,6 +104,19 @@ class Enemy extends FlxSprite
 				baseColor = PixelArt.GRAY;
 				acceleration.y = 600;
 				timer = 1.2;
+			case SPIDERLING:
+				loadGraphic(PixelArt.spiderling(), true, PixelArt.SPIDERLING_W, PixelArt.SPIDERLING_H);
+				animation.add("crawl", [0, 1], 10);
+				animation.play("crawl");
+				hp = 1;
+				stompable = true;
+				usesGround = true;
+				contactDamage = 0; // nem sebez: a csípése ittassá teszi a hőst
+				points = 30;
+				baseColor = 0xff7a5a44;
+				acceleration.y = 600;
+				timer = FlxG.random.float(0.4, 1);
+				life = 14;
 			case DRONE:
 				loadGraphic(PixelArt.drone(), true, PixelArt.DRONE_W, PixelArt.DRONE_H);
 				animation.add("spin", [0, 1], 16);
@@ -108,6 +132,14 @@ class Enemy extends FlxSprite
 		reset(x, y);
 		baseY = y;
 		alpha = 1;
+	}
+
+	/** Tiled-ben elhelyezett ellenség: a (px, py) a talppont-közép, nem a bal-felső sarok. A spawn() után hívandó. */
+	public function place(px:Float, py:Float):Void
+	{
+		x = px - width / 2;
+		y = py - height;
+		baseY = y;
 	}
 
 	/** Találat: hp csökken, rövid fehér villanás. */
@@ -131,6 +163,8 @@ class Enemy extends FlxSprite
 				updateTurret(elapsed);
 			case DRONE:
 				updateDrone(elapsed);
+			case SPIDERLING:
+				updateSpiderling(elapsed);
 		}
 
 		super.update(elapsed);
@@ -147,8 +181,64 @@ class Enemy extends FlxSprite
 			kill();
 	}
 
+	/** A slime ráragad a hősre (a `slot` a már rajta levők száma, hogy ne egy ponton álljanak). */
+	public function attach(hero:FlxSprite, slot:Int):Void
+	{
+		stuck = true;
+		stuckTimer = Config.slimeStickTime;
+		stuckSlot = slot;
+		target = hero;
+		usesGround = false;
+		stompable = false;
+		velocity.set(0, 0);
+		acceleration.set(0, 0);
+	}
+
+	/** A pók kicsinye: a talajon a hős felé mászik (mindkét irányba), közelében ugrik; 14 mp után elporlad. */
+	function updateSpiderling(dt:Float):Void
+	{
+		life -= dt;
+		if (life <= 0)
+		{
+			kill();
+			return;
+		}
+		if (isTouching(FLOOR) && target != null)
+		{
+			var dx = target.x + target.width / 2 - (x + width / 2);
+			var dir = dx < 0 ? -1 : 1;
+			velocity.x = dir * 72;
+			flipX = dir > 0;
+			timer -= dt;
+			if (timer <= 0 && Math.abs(dx) < 100)
+			{
+				velocity.y = -150;
+				timer = FlxG.random.float(0.8, 1.4);
+			}
+		}
+	}
+
 	function updateSlime(dt:Float):Void
 	{
+		if (stuck)
+		{
+			// A hős lábára tapadva utazik; a lejártakor lepottyan és elolvad
+			stuckTimer -= dt;
+			if (target != null)
+			{
+				x = target.x + target.width / 2 - width / 2 + (stuckSlot - 1) * 4;
+				y = target.y + target.height - height + 2 - stuckSlot * 2;
+			}
+			animation.frameIndex = Std.int(t * 5) % 2 == 0 ? 1 : 0;
+			if (stuckTimer <= 0 || target == null || !target.alive)
+			{
+				stuck = false;
+				if (onDetach != null)
+					onDetach(this);
+				kill();
+			}
+			return;
+		}
 		var onGround = isTouching(FLOOR);
 		velocity.x = -55;
 		timer -= dt;

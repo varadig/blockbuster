@@ -27,6 +27,9 @@ class MenuList extends FlxTypedGroup<FlxText>
 	{
 		super();
 		this.labels = labels;
+		// A menükben látszik az egérkurzor, és a menüpontok egérrel is kiválaszthatók; a játékban a PlayState elrejti
+		FlxG.mouse.useSystemCursor = false; // a Flixel saját kurzora
+		FlxG.mouse.visible = true;
 		for (i in 0...labels.length)
 		{
 			var t = new FlxText(0, y + i * spacing, FlxG.width, "", size);
@@ -50,23 +53,63 @@ class MenuList extends FlxTypedGroup<FlxText>
 		}
 
 		var n = labels.length;
-		if (FlxG.keys.anyJustPressed([UP, W]))
+		updateMouse();
+		if (FlxG.keys.anyJustPressed([UP, W]) || Pad.just(UP))
 		{
 			selected = (selected - 1 + n) % n;
 			Audio.play("blip");
 		}
-		else if (FlxG.keys.anyJustPressed([DOWN, S]))
+		else if (FlxG.keys.anyJustPressed([DOWN, S]) || Pad.just(DOWN))
 		{
 			selected = (selected + 1) % n;
 			Audio.play("blip");
 		}
-		else if (FlxG.keys.anyJustPressed([LEFT, A]) && onAdjust != null && !disabled(selected))
+		else if ((FlxG.keys.anyJustPressed([LEFT, A]) || Pad.just(LEFT)) && onAdjust != null && !disabled(selected))
 			onAdjust(selected, -1);
-		else if (FlxG.keys.anyJustPressed([RIGHT, D]) && onAdjust != null && !disabled(selected))
+		else if ((FlxG.keys.anyJustPressed([RIGHT, D]) || Pad.just(RIGHT)) && onAdjust != null && !disabled(selected))
 			onAdjust(selected, 1);
-		else if (FlxG.keys.anyJustPressed([SPACE, ENTER, X, J]) && onSelect != null && !disabled(selected))
+		else if ((FlxG.keys.anyJustPressed([SPACE, ENTER, X, J]) || Pad.just(CONFIRM)) && onSelect != null && !disabled(selected))
 			onSelect(selected);
 		refresh();
+	}
+
+	/** A menüsor indexe az egér alatt (a képernyő-koordinátában), vagy -1. */
+	function rowAt(mx:Float, my:Float):Int
+	{
+		if (mx < 40 || mx > FlxG.width - 40)
+			return -1;
+		for (i in 0...members.length)
+		{
+			var t = members[i];
+			if (my >= t.y - 1 && my < t.y + t.height + 1)
+				return i;
+		}
+		return -1;
+	}
+
+	/**
+	 * Egér: ráhúzva kijelöl, bal kattintás kiválaszt (mint az Enter), jobb kattintás vagy az egérgörgő állít (mint a jobbra/balra nyíl).
+	 * A játék képernyő-koordinátáját használja (a PlayState-ben a kamera elgörgethet, azt nem számítjuk bele).
+	 */
+	function updateMouse():Void
+	{
+		var mx = FlxG.mouse.viewX, my = FlxG.mouse.viewY;
+		var row = rowAt(mx, my);
+		if (row < 0)
+			return;
+		if (FlxG.mouse.justMoved && row != selected)
+		{
+			selected = row;
+			Audio.play("blip");
+		}
+		if (row != selected)
+			return;
+		if (FlxG.mouse.justPressed && onSelect != null && !disabled(row))
+			onSelect(row);
+		else if ((FlxG.mouse.justPressedRight || FlxG.mouse.wheel > 0) && onAdjust != null && !disabled(row))
+			onAdjust(row, 1);
+		else if (FlxG.mouse.wheel < 0 && onAdjust != null && !disabled(row))
+			onAdjust(row, -1);
 	}
 
 	/** Igaz, ha ez már nem az első képkocka (a hívó is használhatja ugyanerre a célra). */

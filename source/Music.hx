@@ -80,6 +80,40 @@ class Music
 		},
 	];
 
+	/** A végső főellenség témája: sötétebb, gyorsabb (156 BPM), e-moll hangulat, tolakodó 16-od hi-hattel. */
+	static final FINAL_PATTERNS:Array<Pattern> = [
+		{chords: ["Em", "Em", "C", "B"], lead: null, drums: "intro"},
+		{
+			chords: ["Em", "C", "Am", "B"],
+			lead: [
+				"E5 . E5 . G5 . E5 . B5 . A5 . G5 . F#5 .",
+				"E5 . E5 . G5 . E5 . C6 . B5 . G5 . E5 .",
+				"C5 . C5 . E5 . C5 . A5 . G5 . E5 . C5 .",
+				"D#5 . F#5 . B5 . A5 . F#5 . D#5 . B4 . .",
+			],
+			drums: "main",
+			hats16: true
+		},
+		{
+			chords: ["Em", "C", "D", "B"],
+			lead: [
+				"B5 . . B5 . . B5 . C6 . B5 . G5 . E5 .",
+				"G5 . . G5 . . G5 . A5 . G5 . E5 . C5 .",
+				"A5 . . A5 . . A5 . B5 . A5 . F#5 . D5 .",
+				"F#5 . A5 . B5 . D#6 . E6 . . . . . . .",
+			],
+			drums: "main",
+			hats16: true
+		},
+	];
+
+	static final FINAL_BPM:Float = 156;
+
+	/** A végső főellenség zenéje. */
+	public static function renderFinal():Array<Float>
+	{
+		return renderSong(FINAL_PATTERNS, [0, 1, 2, 1, 2], FINAL_BPM);
+	}
 	/** Dobminták ütemenként (x = ütés); a "main" utolsó ütemében pergő-felvezetés. */
 	static final KICK = "x.......x.x.....";
 	static final SNARE = "....x.......x...";

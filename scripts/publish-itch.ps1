@@ -13,6 +13,8 @@
 # Futtatás: VS Code > Run Task > "Publish to itch.io", vagy:
 #   powershell -ExecutionPolicy Bypass -File scripts/publish-itch.ps1
 
+param([switch]$NoBuild) # -NoBuild: a build már kész (pl. scripts/release.ps1), csak feltölt
+
 $ErrorActionPreference = "Stop"
 $root = Split-Path -Parent $PSScriptRoot
 Set-Location $root
@@ -48,8 +50,10 @@ if (-not (Test-Path $butler)) {
 $env:HAXEPATH = "C:\HaxeToolkit\haxe"
 $env:NEKO_INSTPATH = "C:\HaxeToolkit\neko"
 $env:Path = "C:\HaxeToolkit\haxe;C:\HaxeToolkit\neko;$env:Path"
-& haxelib run lime build html5
-if ($LASTEXITCODE -ne 0) { throw "A build nem sikerült." }
+if (-not $NoBuild) {
+    & haxelib run lime build html5
+    if ($LASTEXITCODE -ne 0) { throw "A build nem sikerült." }
+}
 
 # Verzió: Project.xml meta version + git rövid hash (ha van)
 [xml]$project = Get-Content (Join-Path $root "Project.xml")

@@ -1,0 +1,178 @@
+{
+    "automappingRulesFile": "",
+    "commands": [],
+    "compatibilityVersion": 1100,
+    "extensionsPath": "extensions",
+    "folders": [
+        "."
+    ],
+    "properties": [],
+    "propertyTypes": [
+        {
+            "id": 1,
+            "name": "EnemyKind",
+            "storageType": "string",
+            "type": "enum",
+            "values": ["SLIME", "BAT", "TURRET", "DRONE"],
+            "valuesAsFlags": false
+        },
+        {
+            "id": 2,
+            "name": "PowerKind",
+            "storageType": "string",
+            "type": "enum",
+            "values": ["SPREAD", "RAPID", "HOMING", "ROCKET", "LASER", "GRENADE", "BONUS", "ENERGY"],
+            "valuesAsFlags": false
+        },
+        {
+            "id": 3,
+            "name": "RewardKind",
+            "storageType": "string",
+            "type": "enum",
+            "values": ["NONE", "RANDOM", "SPREAD", "RAPID", "HOMING", "ROCKET", "LASER", "GRENADE", "BONUS", "ENERGY"],
+            "valuesAsFlags": false
+        },
+        {
+            "id": 15,
+            "name": "ThemeKind",
+            "storageType": "string",
+            "type": "enum",
+            "values": ["NIGHT", "ASH", "ICE", "DESERT", "TOXIC"],
+            "valuesAsFlags": false
+        },
+        {
+            "id": 4,
+            "name": "Ground",
+            "type": "class",
+            "color": "#ff38b764",
+            "drawFill": true,
+            "members": [],
+            "useAs": ["object", "tile"]
+        },
+        {
+            "id": 5,
+            "name": "Platform",
+            "type": "class",
+            "color": "#ff94b0c2",
+            "drawFill": true,
+            "members": [],
+            "useAs": ["object", "tile"]
+        },
+        {
+            "id": 6,
+            "name": "Player",
+            "type": "class",
+            "color": "#ff41a6f6",
+            "drawFill": true,
+            "members": [],
+            "useAs": ["object", "tile"]
+        },
+        {
+            "id": 7,
+            "name": "Enemy",
+            "type": "class",
+            "color": "#ffb13e53",
+            "drawFill": true,
+            "members": [
+                {"name": "kind", "type": "string", "propertyType": "EnemyKind", "value": "SLIME"},
+                {"name": "count", "type": "int", "value": 1},
+                {"name": "spacing", "type": "float", "value": 24},
+                {"name": "lead", "type": "float", "value": 496},
+                {"name": "minDifficulty", "type": "int", "value": 0}
+            ],
+            "useAs": ["object", "tile"]
+        },
+        {
+            "id": 8,
+            "name": "Pickup",
+            "type": "class",
+            "color": "#ffffcd75",
+            "drawFill": true,
+            "members": [
+                {"name": "kind", "type": "string", "propertyType": "PowerKind", "value": "ENERGY"},
+                {"name": "floating", "type": "bool", "value": true},
+                {"name": "lead", "type": "float", "value": 496},
+                {"name": "minDifficulty", "type": "int", "value": 0}
+            ],
+            "useAs": ["object", "tile"]
+        },
+        {
+            "id": 9,
+            "name": "Shroom",
+            "type": "class",
+            "color": "#ffb05cd6",
+            "drawFill": true,
+            "members": [
+                {"name": "lead", "type": "float", "value": 496},
+                {"name": "minDifficulty", "type": "int", "value": 0}
+            ],
+            "useAs": ["object", "tile"]
+        },
+        {
+            "id": 10,
+            "name": "Meteor",
+            "type": "class",
+            "color": "#ffef7d57",
+            "drawFill": true,
+            "members": [
+                {"name": "reward", "type": "string", "propertyType": "RewardKind", "value": "NONE"},
+                {"name": "speed", "type": "float", "value": 100},
+                {"name": "lead", "type": "float", "value": 384},
+                {"name": "minDifficulty", "type": "int", "value": 0}
+            ],
+            "useAs": ["object", "tile"]
+        },
+        {
+            "id": 11,
+            "name": "Shower",
+            "type": "class",
+            "color": "#ffef7d57",
+            "drawFill": false,
+            "members": [
+                {"name": "rate", "type": "float", "value": 1},
+                {"name": "goldEvery", "type": "int", "value": 0},
+                {"name": "reward", "type": "string", "propertyType": "RewardKind", "value": "RANDOM"},
+                {"name": "fallMin", "type": "float", "value": 60},
+                {"name": "fallMax", "type": "float", "value": 140},
+                {"name": "minDifficulty", "type": "int", "value": 0}
+            ],
+            "useAs": ["object", "tile"]
+        },
+        {
+            "id": 14,
+            "name": "Meteorfall",
+            "type": "class",
+            "color": "#ffb13e53",
+            "drawFill": true,
+            "members": [
+                {"name": "count", "type": "int", "value": 14},
+                {"name": "span", "type": "float", "value": 520},
+                {"name": "goldEvery", "type": "int", "value": 0},
+                {"name": "reward", "type": "string", "propertyType": "RewardKind", "value": "RANDOM"},
+                {"name": "fallMin", "type": "float", "value": 70},
+                {"name": "fallMax", "type": "float", "value": 150},
+                {"name": "lead", "type": "float", "value": 560},
+                {"name": "minDifficulty", "type": "int", "value": 0}
+            ],
+            "useAs": ["object", "tile"]
+        },
+        {
+            "id": 12,
+            "name": "Boss",
+            "type": "class",
+            "color": "#ffd04cff",
+            "drawFill": true,
+            "members": [],
+            "useAs": ["object", "tile"]
+        },
+        {
+            "id": 13,
+            "name": "End",
+            "type": "class",
+            "color": "#fff4f4f4",
+            "drawFill": true,
+            "members": [],
+            "useAs": ["object", "tile"]
+        }
+    ]
+}

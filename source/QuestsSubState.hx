@@ -17,6 +17,7 @@ class QuestsSubState extends FlxSubState
 	override public function create():Void
 	{
 		super.create();
+		UiCam.apply(this); // a játék kameraeffektjei (shaderek) a menüt nem érintik
 
 		var title = new FlxText(0, 60, FlxG.width, "QUESTS", 16);
 		title.alignment = CENTER;
@@ -49,7 +50,9 @@ class QuestsSubState extends FlxSubState
 	{
 		super.update(elapsed);
 		// Az első képkockában a megnyitó gombnyomást még nem vesszük figyelembe
-		if (ready && FlxG.keys.anyJustPressed([ESCAPE, SPACE, ENTER]))
+		FlxG.mouse.useSystemCursor = false; // a Flixel saját kurzora
+		FlxG.mouse.visible = true;
+		if (ready && (FlxG.keys.anyJustPressed([ESCAPE, SPACE, ENTER]) || Pad.just(BACK) || Pad.just(CONFIRM) || FlxG.mouse.justPressed))
 		{
 			Audio.play("blip");
 			close();

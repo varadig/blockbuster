@@ -10,6 +10,7 @@ const { chromium } = require('playwright');
     const seg = g.ground.members.filter(m => m.alive && m.height > 20 && m.width > 60 && m.x > sx + 150).sort((a,b)=>a.x-b.x)[0];
     g.player.x = seg.x + 20; g.player.y = seg.y - 20; g.player.velocity.set(0,0); });
   await p.waitForTimeout(700);
+  console.log('tiled level loaded:', await p.evaluate(() => !!window.__game.lvl));
   console.log('player', await p.evaluate(() => [window.__game.player.y, window.__game.player.isTouching(4096)]));
   // Blokk közvetlenül a játékos fölé, aztán felfelé lövés
   await p.evaluate(() => { const g = window.__game; g.spawnTimer = 999;

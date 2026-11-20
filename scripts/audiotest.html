@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Moonshard audio test</title>
+<style>
+  body { font: 16px sans-serif; background: #14182a; color: #eef; margin: 0; padding: 16px; }
+  button { display: block; width: 100%; margin: 10px 0; padding: 18px; font-size: 18px; border-radius: 12px; border: 2px solid #8ac; background: #23305a; color: #fff; }
+  #out { white-space: pre-wrap; font: 13px monospace; color: #9fff9f; margin-top: 12px; }
+</style>
+</head>
+<body>
+<h2>Audio test</h2>
+<p>Tap each button in order and say which ones you HEAR. Turn the ringer switch to loud and the volume up first.</p>
+<button id="b1">1. HTML audio tone</button>
+<button id="b2">2. Web Audio beep</button>
+<button id="b3">3. Silent loop + Web Audio beep</button>
+<div id="out"></div>
+<script>
+const out = document.getElementById('out');
+function say(t) { out.textContent += t + '\n'; fetch('/__log', { method: 'POST', body: JSON.stringify({ t: Date.now(), kind: 'audiotest', data: { msg: t } }) }).catch(() => {}); }
+say('UA: ' + navigator.userAgent);
+say('audioSession: ' + (navigator.audioSession ? 'yes (' + navigator.audioSession.type + ')' : 'no'));
+
+// 0,6 s-os 440 Hz-es sinus 16 bites WAV-ként (data URI)
+function toneWav() {
+  const rate = 22050, n = Math.floor(rate * 0.6), buf = new ArrayBuffer(44 + n * 2), v = new DataView(buf);
+  const w = (o, s) => { for (let i = 0; i < s.length; i++) v.setUint8(o + i, s.charCodeAt(i)); };
+  w(0, 'RIFF'); v.setUint32(4, 36 + n * 2, true); w(8, 'WAVE'); w(12, 'fmt '); v.setUint32(16, 16, true); v.setUint16(20, 1, true);
+  v.setUint16(22, 1, true); v.setUint32(24, rate, true); v.setUint32(28, rate * 2, true); v.setUint16(32, 2, true); v.setUint16(34, 16, true);
+  w(36, 'data'); v.setUint32(40, n * 2, true);
+  for (let i = 0; i < n; i++) v.setInt16(44 + i * 2, Math.sin(2 * Math.PI * 440 * i / rate) * 0.6 * 32767 * Math.min(1, (n - i) / 2000), true);
+  let s = ''; const b = new Uint8Array(buf); for (let i = 0; i < b.length; i++) s += String.fromCharCode(b[i]);
+  return 'data:audio/wav;base64,' + btoa(s);
+}
+
+document.getElementById('b1').onclick = () => {
+  const a = new Audio(toneWav());
+  a.play().then(() => say('1: play() ok'), (e) => say('1: play() FAILED ' + e));
+};
+
+let ctx;
+function beep(tag) {
+  try {
+    if (!ctx) ctx = new (window.AudioContext || window.webkitAudioContext)();
+    ctx.resume().then(() => say(tag + ': ctx ' + ctx.state), (e) => say(tag + ': resume FAILED ' + e));
+    const o = ctx.createOscillator(), g = ctx.createGain();
+    o.frequency.value = 440; g.gain.value = 0.5; o.connect(g); g.connect(ctx.destination);
+    o.start(); o.stop(ctx.currentTime + 0.6);
+    say(tag + ': beep started, state ' + ctx.state);
+  } catch (e) { say(tag + ': ERROR ' + e); }
+}
+document.getElementById('b2').onclick = () => beep('2');
+document.getElementById('b3').onclick = () => {
+  if (navigator.audioSession) navigator.audioSession.type = 'playback';
+  const a = new Audio(toneWav()); a.volume = 0.001; a.loop = true;
+  a.play().then(() => say('3: silent loop ok'), (e) => say('3: loop FAILED ' + e));
+  beep('3');
+};
+</script>
+</body>
+</html>

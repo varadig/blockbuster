@@ -10,6 +10,14 @@
 	},
 	"tasks": [
 		{
+			"label": "Tiled sprite previews",
+			"detail": "A pálya-objektumok sprite-előnézete a Tiled-ben (csempe-objektumok); a .tmx-eket átalakítja, a JSON-t újraexportálja",
+			"type": "shell",
+			"command": "powershell",
+			"args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/scripts/tiled-previews.ps1"],
+			"problemMatcher": []
+		},
+		{
 			"label": "Install dependencies (haxelib)",
 			"detail": "Telepíti a rögzített verziójú lime, openfl, flixel könyvtárakat",
 			"type": "shell",
@@ -48,6 +56,28 @@
 			"problemMatcher": ["$haxe"]
 		},
 		{
+			"label": "Build HTML5 (dev, cheats)",
+			"detail": "Fejlesztői build cheat-menüvel (F9) és a címképernyővel; a release-ben a cheatek nincsenek benne",
+			"type": "shell",
+			"command": "haxelib",
+			"args": ["run", "lime", "build", "html5", "-Dcheats"],
+			"group": "build",
+			"problemMatcher": ["$haxe"]
+		},
+		{
+			"label": "Run HTML5 (dev, cheats)",
+			"detail": "Fordít cheat-menüvel, elindítja a helyi szervert (http://127.0.0.1:3000) és megnyitja a böngészőt",
+			"type": "shell",
+			"command": "haxelib",
+			"args": ["run", "lime", "test", "html5", "-Dcheats"],
+			"isBackground": true,
+			"problemMatcher": {
+				"owner": "haxe",
+				"pattern": { "regexp": "^(.+):(\\d+): characters (\\d+)-\\d+ : (.*)$", "file": 1, "line": 2, "column": 3, "message": 4 },
+				"background": { "activesBegin": "^", "beginsPattern": "^Starting up http-server", "endsPattern": "Hit CTRL-C to stop the server" }
+			}
+		},
+		{
 			"label": "Build HashLink (native)",
 			"type": "shell",
 			"command": "haxelib",
@@ -57,7 +87,7 @@
 		},
 		{
 			"label": "Package for itch.io",
-			"detail": "Normál HTML5 build, majd dist/blockbuster-html5.zip (index.html a zip gyökerében)",
+			"detail": "Normál HTML5 build, majd dist/moonshard-html5.zip (index.html a zip gyökerében)",
 			"type": "shell",
 			"command": "powershell",
 			"args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/scripts/package-itch.ps1"],
@@ -70,6 +100,54 @@
 			"command": "powershell",
 			"args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/scripts/publish-itch.ps1"],
 			"problemMatcher": ["$haxe"]
+		},
+		{
+			"label": "Release (build + package + publish)",
+			"detail": "Teljes kiadás: pályák ellenőrzése, release build, cheat-mentesség ellenőrzése, itch.io zip, feltöltés butlerrel (scripts/release.ps1)",
+			"type": "shell",
+			"command": "powershell",
+			"args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/scripts/release.ps1"],
+			"problemMatcher": ["$haxe"]
+		},
+		{
+			"label": "Release (build + package, no publish)",
+			"detail": "Mint a teljes kiadás, de feltöltés nélkül: csak a dist/moonshard-html5.zip készül el és ellenőrződik",
+			"type": "shell",
+			"command": "powershell",
+			"args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/scripts/release.ps1", "-SkipPublish"],
+			"problemMatcher": ["$haxe"]
+		},
+		{
+			"label": "Export Tiled levels",
+			"detail": "A levels/*.tmx exportálása JSON-ba (assets/levels/) a Tiled parancssorával, majd ellenőrzés; utána fordítani kell",
+			"type": "shell",
+			"command": "powershell",
+			"args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/scripts/export-levels.ps1"],
+			"problemMatcher": []
+		},
+		{
+			"label": "Validate levels",
+			"detail": "Statikus ellenőrzés az assets/levels/*.json fájlokon",
+			"type": "shell",
+			"command": "powershell",
+			"args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/tests/validate-levels.ps1"],
+			"problemMatcher": []
+		},
+		{
+			"label": "Test levels (headless Edge)",
+			"detail": "Tiled-pályák végigpróbálása fejnélküli Edge-ben; előtte: Build HTML5 (test) és a játék kiszolgálása a 3000-es porton",
+			"type": "shell",
+			"command": "powershell",
+			"args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/tests/levels.ps1"],
+			"problemMatcher": []
+		},
+		{
+			"label": "Test features (headless Edge)",
+			"detail": "Konfiguráció, követő sebesség, gomba, automata lövés és cheat-menü tesztje; előtte: Build HTML5 (test) és szerver a 3000-es porton",
+			"type": "shell",
+			"command": "powershell",
+			"args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/tests/features.ps1"],
+			"problemMatcher": []
 		},
 		{
 			"label": "Clean build output",

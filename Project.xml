@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
-	<meta title="Blockbuster" package="com.varadig.blockbuster" version="0.1.0" company="varadig" />
-	<app main="Main" file="Blockbuster" path="export" />
+	<meta title="Moonshard" package="com.varadig.moonshard" version="0.1.0" company="varadig" />
+	<app main="Main" file="Moonshard" path="export" />
 
 	<window width="960" height="540" fps="60" background="#1b1e2b" hardware="true" vsync="true" />
-	<!-- Böngészőben a vászon mindig kitölti az ablakot (0x0 = a tartalom méretét követi) -->
-	<window if="html5" width="0" height="0" resizable="true" />
+	<!-- Böngészőben a vászon mindig kitölti az ablakot (0x0 = a tartalom méretét követi). Nagy DPI kikapcsolva: a játék 480x270, a telefon 3x-os háttérpuffere (pl. 3663x1536) csak lassítana -->
+	<window if="html5" width="0" height="0" resizable="true" allow-high-dpi="false" />
 	<window if="desktop" orientation="landscape" fullscreen="false" resizable="true" />
 
 	<source path="source" />
+
+	<!-- Tiled-pályák (Export As JSON): beágyazva, így a böngészőben nincs aszinkron betöltés. A .tmx forrás a levels/ mappában van, nem csomagolódik -->
+	<assets path="assets/levels" include="*.json" type="text" embed="true" />
+
+	<!-- Finomhangolási értékek (docs/CONFIG.md): beágyazva, módosítás után újra kell fordítani -->
+	<assets path="assets/config" include="*.json" type="text" embed="true" />
+
+	<!-- Fejlesztői (nem release) build: a cheat-menü (F9) csak ezekben van benne: -debug vagy -Dtest; vagy közvetlenül -Dcheats -->
+	<haxedef name="cheats" if="debug" />
+	<haxedef name="cheats" if="test" />
 
 	<!-- Rögzített függőségek (telepítés: scripts/setup.ps1, VS Code: "Install dependencies" feladat) -->
 	<haxelib name="lime" version="8.3.2" />

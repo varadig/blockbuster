@@ -21,6 +21,7 @@ class SettingsSubState extends FlxSubState
 	override public function create():Void
 	{
 		super.create();
+		UiCam.apply(this); // a játék kameraeffektjei (shaderek) a menüt nem érintik
 		Settings.load();
 
 		var title = new FlxText(0, 46, FlxG.width, "SETTINGS", 16);
@@ -35,6 +36,7 @@ class SettingsSubState extends FlxSubState
 			() -> 'EFFECTS VOLUME   < ${pct(Settings.sfxVolume)} >',
 			() -> 'SOUND   < ${Settings.muted ? "OFF" : "ON"} >',
 			() -> 'DIFFICULTY   < ${Settings.difficultyName()} >',
+			() -> "CONTROLS",
 			() -> "BACK",
 		], 8, 16);
 		menu.isDisabled = i -> i == 3 && inGame;
@@ -42,12 +44,13 @@ class SettingsSubState extends FlxSubState
 		menu.onSelect = i -> switch (i)
 		{
 			case 2 | 3: adjust(i, 1);
-			case 4: back();
+			case 4: Audio.play("blip"); openSubState(new ControlsSubState());
+			case 5: back();
 			default:
 		};
 		add(menu);
 
-		info = new FlxText(0, 176, FlxG.width, "", 8);
+		info = new FlxText(0, 188, FlxG.width, "", 8);
 		info.alignment = CENTER;
 		info.color = PixelArt.LIGHT_GRAY;
 		info.setBorderStyle(OUTLINE, PixelArt.OUTLINE, 1);
@@ -99,12 +102,13 @@ class SettingsSubState extends FlxSubState
 	{
 		super.update(elapsed);
 
-		info.text = if (menu.selected == 3)
-			(inGame ? "Difficulty can only be changed on the title screen." : difficultyInfo());
-		else
-			"";
+		info.text = switch (menu.selected)
+		{
+			case 3: inGame ? "Difficulty can only be changed on the title screen." : difficultyInfo();
+			default: "";
+		};
 
-		if (menu.isReady() && FlxG.keys.justPressed.ESCAPE)
+		if (menu.isReady() && (FlxG.keys.justPressed.ESCAPE || Pad.just(BACK)))
 			back();
 	}
 
@@ -112,8 +116,8 @@ class SettingsSubState extends FlxSubState
 	{
 		return switch (Settings.difficulty)
 		{
-			case EASY: "Slower scrolling, fewer boxes, less damage, more rewards.";
-			case HARD: "Faster scrolling, more boxes, more damage, fewer rewards.";
+			case EASY: "Fewer meteors, less damage, more rewards.";
+			case HARD: "More meteors, more damage, fewer rewards.";
 			default: "The intended experience.";
 		}
 	}

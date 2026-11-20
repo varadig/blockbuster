@@ -15,8 +15,12 @@ enum abstract QuestType(String) from String to String
 
 typedef QuestGoal = {type:QuestType, target:Int};
 
-/** Egy pálya: név, a teljesítendő küldetések (mind kell a főellenséghez), görgetési szorzó. */
-typedef LevelDef = {name:String, goals:Array<QuestGoal>, speed:Float};
+/**
+ * Egy pálya: név, küldetések, görgetési szorzó és opcionálisan a Tiled-térkép (asset útvonal).
+ * Térképes pályán a térkép nevét, sebességét és küldetéseit felülírhatja (lásd LevelLoader), a főellenség a
+ * térképen kijelölt helyen jön; térkép nélkül a pálya procedurálisan generálódik, és a küldetések teljesítése hívja a főellenséget.
+ */
+typedef LevelDef = {name:String, goals:Array<QuestGoal>, speed:Float, ?map:String};
 
 /**
  * Pálya-alapú küldetések: minden pályának 3 rögzített küldetése van, ezeket a pályán kell teljesíteni.
@@ -37,9 +41,16 @@ class Quests
 
 	/** A pályák; az utolsó után a pályák ennek fokozatosan nehezebb változatai. */
 	public static final LEVELS:Array<LevelDef> = [
-		{name: "CRATER FIELDS", goals: [{type: BOXES, target: 25}, {type: ENEMIES, target: 6}, {type: POWERUPS, target: 4}], speed: 1},
-		{name: "ASHEN VALLEY", goals: [{type: BOXES, target: 40}, {type: STOMPS, target: 3}, {type: GOLD_BOXES, target: 3}], speed: 1.12},
-		{name: "BLOOD MOON", goals: [{type: ENEMIES, target: 20}, {type: BOXES, target: 60}, {type: WEAPON_STACK, target: 3}], speed: 1.25},
+		{name: "CRATER FIELDS", goals: [{type: BOXES, target: 25}, {type: ENEMIES, target: 6}, {type: POWERUPS, target: 4}], speed: 1, map: "assets/levels/01_crater_fields.json"},
+		{name: "ASHEN VALLEY", goals: [{type: BOXES, target: 40}, {type: STOMPS, target: 3}, {type: GOLD_BOXES, target: 3}], speed: 1.12, map: "assets/levels/02_ashen_valley.json"},
+		{name: "BLOOD MOON", goals: [{type: BOXES, target: 50}, {type: ENEMIES, target: 12}, {type: GOLD_BOXES, target: 5}], speed: 1.25, map: "assets/levels/03_blood_moon.json"},
+		{name: "FROZEN RIDGE", goals: [{type: BOXES, target: 55}, {type: ENEMIES, target: 17}, {type: POWERUPS, target: 4}], speed: 1.3, map: "assets/levels/04_frozen_ridge.json"},
+		{name: "TOXIC MARSH", goals: [{type: BOXES, target: 70}, {type: ENEMIES, target: 18}, {type: WEAPON_STACK, target: 3}], speed: 1.35, map: "assets/levels/05_toxic_marsh.json"},
+		{name: "DUNE SEA", goals: [{type: BOXES, target: 80}, {type: ENEMIES, target: 22}, {type: STOMPS, target: 6}], speed: 1.4, map: "assets/levels/06_dune_sea.json"},
+		{name: "GLACIER NIGHT", goals: [{type: BOXES, target: 85}, {type: ENEMIES, target: 20}, {type: GOLD_BOXES, target: 5}], speed: 1.45, map: "assets/levels/07_glacier_night.json"},
+		{name: "SPORE HOLLOW", goals: [{type: BOXES, target: 100}, {type: ENEMIES, target: 24}, {type: POWERUPS, target: 4}], speed: 1.5, map: "assets/levels/08_spore_hollow.json"},
+		{name: "LUNAR WASTES", goals: [{type: BOXES, target: 100}, {type: ENEMIES, target: 26}, {type: WEAPON_STACK, target: 3}], speed: 1.55, map: "assets/levels/09_lunar_wastes.json"},
+		{name: "THE LAST NIGHT", goals: [{type: BOXES, target: 110}, {type: ENEMIES, target: 26}, {type: STOMPS, target: 8}], speed: 1.6, map: "assets/levels/10_the_last_night.json"},
 	];
 
 	/** Az aktuális pálya (0-tól). */
@@ -56,7 +67,51 @@ class Quests
 	static var run:Map<String, Int> = new Map();
 	static var allFired:Bool = false;
 
+	/** Az összefésült pályaleírások (a térkép felülírásaival), pályánként gyorsítótárazva. */
+	static var defCache:Map<Int, LevelDef> = new Map();
+
+	/** Gyorsítótár törlése (tesztek: a LEVELS vagy a betöltött térképek módosítása után). */
+	public static function resetCache():Void
+	{
+		defCache = new Map();
+	}
+
 	public static function levelDef(l:Int):LevelDef
+	{
+		var c = defCache.get(l);
+		if (c != null)
+			return c;
+		var d = baseDef(l);
+		if (d.map != null)
+		{
+			var lvl = LevelLoader.load(d.map);
+			if (lvl != null)
+				d = merge(d, lvl);
+		}
+		defCache.set(l, d);
+		return d;
+	}
+
+	/** A térkép felülírja a nevet, a sebességet és (helyenként) a küldetéseket. */
+	static function merge(d:LevelDef, lvl:LevelData):LevelDef
+	{
+		var goals = d.goals.copy();
+		for (i in 0...goals.length)
+			if (i < lvl.goals.length && lvl.goals[i] != null)
+				goals[i] = lvl.goals[i];
+		#if (debug || test)
+		for (w in lvl.warnings.concat(LevelLoader.questWarnings(lvl, goals)))
+			trace('[LevelLoader] ${lvl.source}: $w');
+		#end
+		return {
+			name: lvl.name != "" ? lvl.name : d.name,
+			goals: goals,
+			speed: lvl.speed > 0 ? lvl.speed : d.speed,
+			map: d.map
+		};
+	}
+
+	static function baseDef(l:Int):LevelDef
 	{
 		if (l < LEVELS.length)
 			return LEVELS[l];

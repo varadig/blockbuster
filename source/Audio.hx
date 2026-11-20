@@ -51,8 +51,13 @@ class Audio
 	static inline var MUSIC_VOLUME:Float = 0.6;
 
 	static var sounds = new Map<String, Sound>();
+	/** A legutóbb legenerált WAV (a WebSfx regisztrációhoz). */
+	static var lastWav:Bytes;
 	static var musicSound:Sound;
 	static var shieldSound:Sound;
+	static var finalSound:Sound;
+	/** Épp a végső főellenség zenéje szól. */
+	static var finalPlaying:Bool = false;
 	static var shieldMusic:FlxSound;
 	static var initialized = false;
 
@@ -62,6 +67,9 @@ class Audio
 		if (initialized)
 			return;
 		initialized = true;
+		#if js
+		WebSfx.init();
+		#end
 
 		// A némítást (M) a Settings kezeli és menti; a Flixel saját némító/hangerő gombjait kikapcsoljuk
 		FlxG.sound.muteKeys = [];
@@ -158,14 +166,45 @@ class Audio
 		add("tick", [{dur: 0.05, wave: SQUARE, duty: 0.25, f0: 1800, decay: 1.2, vol: 0.3}]);
 
 		musicSound = toSound(Music.render(), 2, 0.55);
+		#if js
+		WebSfx.registerMusic("main", lastWav, 2);
+		#end
 		shieldSound = toSound(Music.renderShield(), 2, 0.6);
+		#if js
+		WebSfx.registerMusic("shield", lastWav, 2);
+		#end
+		finalSound = toSound(Music.renderFinal(), 2, 0.58);
+		#if js
+		WebSfx.registerMusic("final", lastWav, 2);
+		// A hangerő / némítás változását minden képkockában követjük (a zene a Web Audio-n szól)
+		FlxG.signals.postUpdate.add(syncWebMusic);
+		#end
 	}
+
+	#if js
+	/** Böngészőben a zene a Web Audio-n szól (WebSfx): a kért dal, a sérthetetlenség-zene és a szünet állapota. */
+	static var wantMusic:Null<String> = null;
+	static var shieldOn:Bool = false;
+	static var musicPaused:Bool = false;
+
+	static function syncWebMusic():Void
+	{
+		var name = shieldOn ? "shield" : wantMusic;
+		var vol = MUSIC_VOLUME * Settings.musicVolume * (FlxG.sound.muted ? 0 : FlxG.sound.volume);
+		WebSfx.music(Perf.noMusic ? null : name, vol, musicPaused);
+	}
+	#end
 
 	/** Sérthetetlenség: a fő zene szünetel, helyette a gyors "csillag" dal szól. */
 	public static function startShieldMusic():Void
 	{
 		if (shieldSound == null)
 			return;
+		#if js
+		shieldOn = true;
+		syncWebMusic();
+		return;
+		#end
 		if (FlxG.sound.music != null && FlxG.sound.music.playing)
 			FlxG.sound.music.pause();
 		if (shieldMusic != null && shieldMusic.exists)
@@ -179,6 +218,11 @@ class Audio
 	/** A sérthetetlenség vége: vissza a fő zenére. */
 	public static function stopShieldMusic(resumeMain:Bool = true):Void
 	{
+		#if js
+		shieldOn = false;
+		syncWebMusic();
+		return;
+		#end
 		if (shieldMusic != null && shieldMusic.exists)
 			shieldMusic.stop();
 		shieldMusic = null;
@@ -189,6 +233,11 @@ class Audio
 	/** Szünetmenü: minden zene megáll (és folytatható). */
 	public static function pauseMusic():Void
 	{
+		#if js
+		musicPaused = true;
+		syncWebMusic();
+		return;
+		#end
 		if (FlxG.sound.music != null)
 			FlxG.sound.music.pause();
 		if (shieldMusic != null && shieldMusic.exists)
@@ -197,6 +246,11 @@ class Audio
 
 	public static function resumeMusic():Void
 	{
+		#if js
+		musicPaused = false;
+		syncWebMusic();
+		return;
+		#end
 		if (shieldMusic != null && shieldMusic.exists)
 			shieldMusic.resume();
 		else if (FlxG.sound.music != null)
@@ -206,13 +260,30 @@ class Audio
 	public static function play(name:String, volume:Float = 1):Void
 	{
 		var s = sounds.get(name);
+		if (Perf.noSfx)
+			return; // ?nosfx=1: hangeffektek nélkül (lassulás-kereséshez)
 		if (s != null && Settings.sfxVolume > 0)
+		{
+			var t0 = Perf.mark();
+			#if js
+			if (WebSfx.play(name, FlxG.sound.muted ? 0 : volume * Settings.sfxVolume * FlxG.sound.volume))
+			{
+				Perf.audio(t0);
+				return;
+			}
+			#end
 			FlxG.sound.play(s, volume * Settings.sfxVolume);
+			Perf.audio(t0);
+		}
 	}
 
 	/** A zene hangerejének frissítése a beállítás szerint (a menüből hívva). */
 	public static function updateMusicVolume():Void
 	{
+		#if js
+		syncWebMusic();
+		return;
+		#end
 		if (FlxG.sound.music != null)
 			FlxG.sound.music.volume = MUSIC_VOLUME * Settings.musicVolume;
 		if (shieldMusic != null && shieldMusic.exists)
@@ -222,15 +293,56 @@ class Audio
 	/** A háttérzene indítása (ha már szól, nem indul újra). */
 	public static function playMusic():Void
 	{
-		if (musicSound == null)
+		if (musicSound == null || Perf.noMusic)
 			return;
+		#if js
+		wantMusic = finalPlaying ? "final" : "main";
+		syncWebMusic();
+		return;
+		#end
 		if (FlxG.sound.music != null && FlxG.sound.music.playing)
 			return;
 		FlxG.sound.playMusic(musicSound, null, MUSIC_VOLUME * Settings.musicVolume, true);
 	}
 
+	/** A végső főellenség harcának zenéje (a fő zene helyett; ha már szól, nem indul újra). */
+	public static function playFinalMusic():Void
+	{
+		if (finalSound == null || finalPlaying)
+			return;
+		finalPlaying = true;
+		#if js
+		wantMusic = "final";
+		syncWebMusic();
+		return;
+		#end
+		FlxG.sound.playMusic(finalSound, null, MUSIC_VOLUME * Settings.musicVolume, true);
+	}
+
+	/** Ha a végső főellenség zenéje szólt, vissza a fő zenére (pályaváltáskor, a főellenség legyőzésekor). */
+	public static function restoreMainMusic():Void
+	{
+		if (!finalPlaying)
+			return;
+		finalPlaying = false;
+		#if js
+		wantMusic = "main";
+		syncWebMusic();
+		return;
+		#end
+		if (musicSound != null)
+			FlxG.sound.playMusic(musicSound, null, MUSIC_VOLUME * Settings.musicVolume, true);
+	}
+
 	public static function stopMusic():Void
 	{
+		finalPlaying = false;
+		#if js
+		wantMusic = null;
+		shieldOn = false;
+		musicPaused = false;
+		syncWebMusic();
+		#end
 		stopShieldMusic(false);
 		if (FlxG.sound.music != null)
 			FlxG.sound.music.stop();
@@ -247,6 +359,9 @@ class Audio
 			mixInto(mix, tone(t), start, 1);
 		}
 		sounds.set(name, toSound(mix, 1, 0.8));
+		#if js
+		WebSfx.register(name, lastWav); // böngészőben az effektek a Web Audio-n szólnak (a lime útja iPhone-on 100+ ms hívásonként)
+		#end
 	}
 
 	/** `src`-t hozzáadja `dst`-hez a `start` mintától (szükség esetén megnyújtja). */
@@ -348,6 +463,7 @@ class Audio
 			var v = Math.max(-1, Math.min(1, state[c]));
 			b.set(44 + i, Std.int(Math.round(v * 127)) + 128); // 8 bites előjel nélküli
 		}
+		lastWav = b;
 		return Sound.fromAudioBuffer(AudioBuffer.fromBytes(b));
 	}
 }
