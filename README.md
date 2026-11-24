@@ -1,165 +1,151 @@
 # Moonshard
 
-Gyors tempójú, oldalnézetes 2D platformer Haxe + HaxeFlixel alapon.
-Komor, holdfényes éjszaka: a kamera a hőst követi jobbra, fentről meteorok hullanak, és egyre több
-ellenség jön. Teljesítsd a pálya küldetéseit, győzd le a főellenséget, és haladj tovább a következő pályára!
+**English** · [Magyar](README.hu.md)
 
-## Irányítás
-Alapkiosztás; minden billentyű átállítható a **Beállítások > Controls** menüben, a **Help** a mostani kiosztást mutatja.
+A fast-paced, side-scrolling 2D platformer built with Haxe and HaxeFlixel.
+A gloomy, moonlit night: the camera follows the hero to the right, meteors rain from above, and more and more enemies arrive. Complete the level missions, defeat the boss, and move on to the next level.
 
-| Billentyű | Funkció |
+## Controls
+
+Default layout. Every key can be rebound in **Settings > Controls**, and **Help** shows the current layout.
+
+| Key | Action |
 |---|---|
-| A D / ← → | futás |
-| Space / Z | ugrás (hosszan nyomva magasabb) |
-| Le / S | guggolás a földön: kisebb célpont, lassabb mozgás, és a lövés alacsonyan indul (az alacsony tárgyakat is eltalálja) |
-| J / X | lövés előre (nyomva tartva folyamatos sorozat) |
-| L / C (nyomva tartva) | töltött lövés: tölt, és **felengedéskor** egyetlen nagyobb tűzerejű lövés megy ki (töltésjelző a hősnél) |
-| ↑ / W + lövés | lövés felfelé |
-| ↑ / W + ← → + lövés | lövés 45 fokban, átlósan előre-fel |
-| ↓ / S (a levegőben) + lövés | lövés lefelé; ↓ + ← → + lövés: 45 fokban lefelé |
-| P / Esc | szünet (folytatás, beállítások, kilépés) |
-| Kontroller (PS4 / Xbox) | bal kar / D-pad: mozgás, menü; Kereszt (A): ugrás, választás; Négyzet (X) / R1: lövés; Kör (B): töltött lövés (menüben: vissza); Options (Start): szünet; R2: cheat-menü (csak fejlesztői buildben) |
-| N | hang be/ki |
-| F | teljes képernyő |
-| F9 | cheat-menü (csak fejlesztői buildben, a release-ben nincs) |
-| F10 | egyből a főellenséghez (csak fejlesztői buildben) |
-| R / Enter | újrakezdés (a játék vége után) |
+| A D / ← → | run |
+| Space / Z | jump (hold for a higher jump) |
+| Down / S | crouch on the ground: smaller target, slower movement, and shots start low (hits low objects too) |
+| J / X | shoot forward (hold for continuous fire) |
+| L / C (hold) | charged shot: charges, and **on release** fires one larger, stronger shot (charge indicator on the hero) |
+| Up / W + shoot | shoot upward |
+| Up / W + ← → + shoot | shoot diagonally up-forward at 45° |
+| Down / S (in the air) + shoot | shoot downward; Down + ← → + shoot: 45° downward |
+| P / Esc | pause (resume, settings, quit) |
+| Gamepad (PS4 / Xbox) | left stick / D-pad: move and menus; Cross (A): jump and select; Square (X) / R1: shoot; Circle (B): charged shot (in menus: back); Options (Start): pause; R2: cheat menu (development builds only) |
+| N | sound on/off |
+| F | fullscreen |
+| F9 | cheat menu (development builds only, not in release) |
+| F10 | jump straight to the boss (development builds only) |
+| R / Enter | restart (after game over) |
 
-## Szabályok
+## Rules
 
-- **Témák**: a pályáknak különböző megjelenésük van (ég, hold/nap, hegyek, talaj, időjárás): NIGHT (vérhold), ASH (hamu, vulkáni ég), ICE (hó, jég), DESERT (homok, alkony), TOXIC (savas zöld, spórák). A Tiled-térkép `theme` tulajdonsága állítja (lásd docs/LEVELS.md); a témák színei a `source/Themes.hx`-ben vannak.
-- **Meteoreső** (METEOR FALL!): 2 mp-es, feltűnő figyelmeztetés (felirat, vörös villanás, riasztás), majd 12-20 meteor hullik egyszerre a képernyő szélességében (minden hatodik arany); az 1-2. pályán 3-4 helyen, a procedurális pályákon 22-34 mp-enként. Utána gyakran energiabónusz vár. A pályákon több akadály (rések, falak, lépcsők, platformok), több ellenség és módosító tárgy is van.
-- **Főellenségek**: az 1. pálya anyahajó, a 2. harckocsi (**IRON CRAWLER**: ágyúsorozat, ívben dobott bombák, a 2. fázisban meteorok), a 3. kísértetféreg (**PHANTOM WYRM**: agyaras szájából lő, denevéreket köp). A 4. pálya **MUSCLE MAW** (gömbhajítás, ugrás + talajon futó lökéshullám), az 5. **THE WATCHER** (szemlövések, slime-köpés), a 6. **THE KILLER** (rárontás, tüskeeső). a 7. **FUZZ STRIDER** (szőrös pók: a hős alatt feltörő tüskék, lassító háló). a 8. **FLUFF GOLEM** (bolyhos óriás: pattogó pihegolyók, szálló spórák), a 9. **THE HOLLOW MOON** (kiüresedett hold: meteoreső-hívás, szilánk-sorozat, gravitációs örvény). A 10. pálya a végső főellenség: egy óriás slime (**THE FINAL SLIME**), ami a korábbi főellenségekké változik át, 25% életerő alatt megőrül és sűrűn váltogat. Utána (a 11. pálytól) újra elölről. A talajon járók gravitációval esnek, és nem sétálnak szakadék fölé.
-- **Érmék és bolt**: a szétlőtt meteorokból és ellenségekből néha érme pattan ki (érintéssel, közelről magától felveszed; a főellenség 12+ érmét ad egyből). Az érmék mentve vannak, és a pálya végén a **bolt** nyílik (a címképernyőn is: SHOP), ikonokkal:
-  - fejlesztések: **ARMOR** (-10% sebzés/szint, 5 szint), **PISTOL POWER** (+1 sebzés/szint, 3), **ENERGY** (+15%/szint, 4), **FIRE RATE** (-10% várakozás/szint, 3);
-  - fegyverek (egyszeri ár, utána felszerelhető): **ROCKET LAUNCHER**, **LASER**, **GRENADES**. A felszerelt fegyver végtelen ideig tart, és a futás vele indul; az árak az `Upgrades.hx`-ben vannak.
-- **Karakter**: a START után három hős közül lehet választani, mozgásuk különbözik (a `source/Characters.hx`-ben állítható):
-  - **BLAZE**: kiegyensúlyozott;
-  - **ZIP**: nagyon gyors, de csúszik megálláskor (kis súrlódás), kisebbet ugrik;
-  - **ROCK**: lassú, magasra ugrik, azonnal megáll (nagy súrlódás).
-  Futás közben por száll a lábak mögül, gyors futásnál sebességcsíkok is; fékezéskor (csúszós hősnél hosszan) nagyobb porfelhő jön.
-- **Becsapódás-jelző**: minden zuhanó meteor alatt villogó sáv mutatja, hová csapódik be (szakadék fölött nincs jelző). A földet ért meteorok egymáson állnak: ha az alsót kilövöd, a felette levő leesik.
-- **Töltött lövés**: az M nyomva tartása tölt (a sorozatlövő gyorsítja), felengedéskor egy nagy lövés: nagyobb, erősebb, átütő lövedék / nagyobb robbanású rakéta és gránát / vastagabb lézer.
-- A kamera csak előre követi a hőst (a már elhagyott rész nem jön vissza); a hős a képernyő bal szélén sem futhat ki.
-- A hősnek energiája van (100). A zuhanó meteor méret szerint 15 / 30 / 50 energiát sebez, utána rövid
-  ideig sérthetetlen. Szakadékba esés 30 energia, és a hős visszakerül a pályára.
-  20% alatt a csík piros és figyelmeztető hang szól.
-- 0 energiánál **3-szor folytatható** (CONTINUE, 10 mp-es visszaszámlálás): teli energiával, a pontszám,
-  a pálya és a küldetések megmaradnak. Utána vége.
-- Pont: megtett távolság + extra pont szétlőtt meteoronként (méret szerint 25 / 40 / 60).
-  A "+pont" felirat a pontszám-kijelzőhöz repül, és az felvillan. Csúcspontszám nehézségenként.
-- Az arany, csillogó jutalommeteorból szétlövéskor bónusz pattan ki; érintéssel veheted fel.
+- **Themes:** levels have different looks (sky, moon/sun, mountains, ground, weather): NIGHT (blood moon), ASH (ash, volcanic sky), ICE (snow, ice), DESERT (sand, dusk), TOXIC (acid green, spores). The Tiled map's `theme` property sets it (see docs/LEVELS.md). The theme colors are in `source/Themes.hx`.
+- **Meteor storm** (METEOR FALL!): a 2-second, very visible warning (caption, red flash, alarm), then 12–20 meteors fall at once across the screen width (every sixth one is gold). Levels 1–2 have it at 3–4 spots, procedural levels every 22–34 s. Often an energy bonus follows. Levels have obstacles (gaps, walls, steps, platforms), more enemies, and modifier items.
+- **Bosses:** level 1 is a mothership, level 2 a tank (**IRON CRAWLER**: cannon bursts, arcing bombs, meteors in phase 2), level 3 a ghost worm (**PHANTOM WYRM**: shoots from its fanged mouth, spits bats). Level 4 **MUSCLE MAW** (throws balls, jump + ground shockwave), level 5 **THE WATCHER** (eye beams, slime spit), level 6 **THE KILLER** (charges, spike drops), level 7 **FUZZ STRIDER** (hairy spider: spikes erupt under the hero, slowing webs), level 8 **FLUFF GOLEM** (fluffy giant: bouncing fuzz balls, floating spores), level 9 **THE HOLLOW MOON** (emptied moon: calls meteor storms, shard bursts, gravity vortex). Level 10 is the final boss, **THE FINAL SLIME**: a giant slime that turns into the earlier bosses; below 25% health it goes berserk and switches forms often. After that (from level 11) the cycle restarts. Ground-walking bosses fall with gravity and do not step over pits.
+- **Coins and shop:** shot-down meteors and enemies sometimes drop coins (touch them; nearby ones are collected automatically). The boss drops 12+ coins at once. Coins are saved, and at the end of a level the **shop** opens (also from the title screen: SHOP):
+  - upgrades: **ARMOR** (-10% damage per level, 5 levels), **PISTOL POWER** (+1 damage per level, 3), **ENERGY** (+15% per level, 4), **FIRE RATE** (-10% delay per level, 3);
+  - weapons (one-time price, then equippable): **ROCKET LAUNCHER**, **LASER**, **GRENADES**. An equipped weapon lasts forever, and runs start with it. Prices are in `Upgrades.hx`.
+- **Characters:** after START you choose one of three heroes, each with different movement (set in `source/Characters.hx`):
+  - **BLAZE**: balanced;
+  - **ZIP**: very fast, but slides when stopping (low friction), jumps a bit lower;
+  - **ROCK**: slow, jumps high, stops instantly (high friction).
+  Dust trails behind running feet, with speed lines at high speed. Braking kicks up a bigger dust cloud (longer for the sliding hero).
+- **Impact markers:** every falling meteor shows a flashing strip where it will land (none over pits). Meteors that have landed stack on each other: if you shoot the bottom one, the one above falls.
+- **Charged shot:** holding M charges (rapid fire speeds this up). On release you get one big shot: a larger, stronger, piercing projectile, a bigger-blast rocket or grenade, or a thicker laser.
+- The camera only follows the hero forward (already passed areas do not come back). The hero cannot run off the left edge of the screen.
+- The hero has energy (100). A falling meteor deals 15 / 30 / 50 depending on size, then there is a short invulnerability. Falling into a pit costs 30 energy, and the hero is returned to the level.
+  Below 20% the bar turns red and a warning sounds.
+- At 0 energy you can **continue 3 times** (CONTINUE, 10 s countdown): you come back with full energy, and your score, level and missions are kept. After that it is game over.
+- Score: distance travelled + bonus points for each shot-down meteor (25 / 40 / 60 by size). A "+points" label flies to the score counter, which flashes. High scores are kept per difficulty.
+- Shooting the gold, sparkling bonus meteor drops a bonus; touch it to collect it.
 
-**Fegyverek** – a hős **pisztollyal** indul (egylövetű; a boltban felszerelhető másik fegyver is). A pályán talált fegyverbónusz (12 mp) lecseréli az aktuálisat; lejártakor visszaáll a felszerelt fegyver:
+**Weapons:** the hero starts with a **pistol** (single shot; the shop can equip another weapon). A weapon bonus found in a level (12 s) replaces the current weapon. When it expires, the equipped weapon returns:
 
-| Fegyver | Hatás |
+| Weapon | Effect |
 |---|---|
-| PISTOL | alapfegyver, egylövetű; töltve nagy, átütő golyó |
-| ROCKET LAUNCHER | rakéta, becsapódáskor közepes hatósugárban robban; lassabban tüzel |
-| LASER | nagyon gyors lézerlövedék, ami minden dobozon és ellenségen átmegy |
-| GRENADE | ívben repülő gránát, becsapódáskor **nagy hatósugárban** robban |
+| PISTOL | basic weapon, single shot; charged: large piercing bullet |
+| ROCKET LAUNCHER | rockets explode on impact in a medium radius; slower fire |
+| LASER | very fast laser bolt that passes through every crate and enemy |
+| GRENADE | grenade thrown in an arc, explodes on impact in a **large** radius |
 
-A robbanás minden meteort, ellenséget és ellenséges lövedéket elpusztít a körben (a hőst nem sebzi), és a főellenséget is sebzi.
+Explosions destroy every meteor, enemy and enemy projectile in their radius (they do not hurt the hero), and also damage the boss.
 
-**Fegyver-kiegészítők** – egymásra rakódnak (12 mp), és bármelyik fegyverrel működnek:
+**Weapon add-ons:** they stack (12 s each) and work with any weapon:
 
-| Kiegészítő | Hatás |
+| Add-on | Effect |
 |---|---|
-| RAPID FIRE (sorozatlövő) | gyorsabb tüzelés az aktuális fegyverrel, gyorsabb töltés |
-| SPREAD SHOT | 3 lövedék / rakéta / gránát / lézersugár legyezőben |
-| HOMING (nyomkövető) | a pisztolylövedék, a rakéta és a gránát a legközelebbi ellenség (vagy főellenség) felé kanyarodik |
+| RAPID FIRE | faster fire with the current weapon, faster charging |
+| SPREAD SHOT | 3 bullets / rockets / grenades / laser beams in a fan |
+| HOMING | pistol bullets, rockets and grenades curve toward the nearest enemy (or the boss) |
 
-**Egyéb bónuszok:** BONUS (+250 pont), ENERGY (+35 energia).
+**Other bonuses:** BONUS (+250 points), ENERGY (+35 energy).
 
-**Módosítók** – időkorlátos, a hőst nehezítő hatások; a talajon fekvő tárgyak (a varázsgomba is ilyen), hozzáérve bekapcsolnak. Nem lehet lelőni őket. Az idők, erősségek és a gyakoriság a `game.json` `modifiers` szakaszában állíthatók:
+**Modifiers:** time-limited effects that make the hero's life harder. They are items lying on the ground (the magic mushroom is one too) and activate when touched. They cannot be shot. Timing, strength and frequency are set in the `modifiers` section of `game.json`:
 
-| Módosító | Hatás |
+| Modifier | Effect |
 |---|---|
-| MAGIC MUSHROOM (SHROOM) | hallucináció: a kép hullámzik és színt vált |
-| PIXELATED (PIXEL) | még nagyobb pixelek (nehezebb látni) |
-| FLASHLIGHT (TORCH) | csak a hős és egy kis kör körülötte látszik |
-| INVISIBLE (GHOST) | láthatatlan hős |
-| TUNNEL (TINYVIEW) | összezsugorított látómező: a hős körüli kis ablak látszik |
-| TINY HERO (TINYHERO) | összezsugorított hős |
-| MAGNETIC (MAGNET) | a zuhanó és a már leesett meteorok (a földön csúsznak), az ellenséges lövedékek és a repülő ellenségek lassan a hős felé tartanak |
+| MAGIC MUSHROOM (SHROOM) | hallucination: the picture wobbles and shifts color |
+| PIXELATED (PIXEL) | even bigger pixels (harder to see) |
+| FLASHLIGHT (TORCH) | only the hero and a small circle around it are visible |
+| INVISIBLE (GHOST) | invisible hero |
+| TUNNEL (TINYVIEW) | shrunken field of view: only a small window around the hero is visible |
+| TINY HERO (TINYHERO) | shrunken hero |
+| MAGNETIC (MAGNET) | falling and already-landed meteors (sliding on the ground), enemy projectiles and flying enemies slowly drift toward the hero |
 
-Az aktív bónuszok és módosítók névvel és hátralévő idővel a jobb felső sarokban látszanak. A HUD és a feliratok külön kamerán vannak, ezért a módosítók (pixelesítés, zseblámpa, hallucináció…) shaderei rájuk nem hatnak, mindig jól olvashatók.
+Active bonuses and modifiers show their name and remaining time in the top-right corner. The HUD and captions are on a separate camera, so modifier shaders (pixelation, flashlight, hallucination…) do not affect them. They always stay readable.
 
-## Ellenségek
+## Enemies
 
-Az idő múlásával egyre több és többféle ellenség jön (az új fajta érkezését figyelmeztetés jelzi):
+As time passes, more and more enemies arrive (a warning announces each new type):
 
-| Ellenség | Megjelenik | Viselkedés | Pont |
+| Enemy | Appears at | Behavior | Points |
 |---|---|---|---|
-| SLIME | 20 mp | a földön ugrálva közeledik; rá lehet ugrani | 50 |
-| BAT | 45 mp | hullámvonalban repül, a hős közelében lecsap; rá lehet ugrani | 40 |
-| TURRET | 75 mp | álló lövegtorony, a hősre lő | 80 |
-| DRONE | 110 mp | a hős fölött lebeg és bombákat dob | 120 |
+| SLIME | 20 s | hops toward you on the ground; can be stomped | 50 |
+| BAT | 45 s | flies in a wave, swoops down near the hero; can be stomped | 40 |
+| TURRET | 75 s | stationary gun turret, fires at the hero | 80 |
+| DRONE | 110 s | hovers above the hero and drops bombs | 120 |
 
-Ráugrással (stomp) dupla pont jár. Minden fegyver hat rájuk (a robbanások is).
+Stomping gives double points. Every weapon hits them (explosions too).
 
-## Pályák, küldetések, főellenség
+## Levels, missions, boss
 
-Minden pályának 3 küldetése van. A kamera a pálya végén lassan megáll, és megérkezik a főellenség
-(MOTHERSHIP): meteorokat ejt (minden harmadik arany, bónusszal), legyezőben lő, fél életerő alatt gyorsabb,
-és denevéreket hív. Legyőzése után „LEVEL CLEAR”, majd jön a következő, gyorsabb pálya új küldetésekkel:
+Each level has 3 missions. At the end of a level the camera slowly stops, and the boss (MOTHERSHIP) arrives: it drops meteors (every third one is gold, with a bonus), fires in a fan, gets faster below half health, and summons bats. After defeating it you get "LEVEL CLEAR", then the next, faster level with new missions:
 
-| Pálya | Típus | Küldetések |
+| Level | Type | Missions |
 |---|---|---|
-| 1 – CRATER FIELDS | Tiled, ~9800 px | 25 meteor, 6 ellenség, 4 bónusz felvétele |
-| 2 – ASHEN VALLEY | Tiled, ~12200 px | 40 meteor, 3 ráugrás, 3 arany meteor |
-| 3 – BLOOD MOON | Tiled, ~9800 px | 50 meteor, 12 ellenség, 5 arany meteor |
-| 4 – FROZEN RIDGE | Tiled, ~10200 px | 55 meteor, 17 ellenség, 4 bónusz |
-| 5 – TOXIC MARSH | Tiled, ~10600 px | 70 meteor, 18 ellenség, 3 fegyverbónusz egyszerre |
-| 6 – DUNE SEA | Tiled, ~11000 px | 80 meteor, 22 ellenség, 6 ráugrás |
-| 7 – GLACIER NIGHT | Tiled, ~11400 px | 85 meteor, 20 ellenség, 5 arany meteor |
-| 8 – SPORE HOLLOW | Tiled, ~11800 px | 100 meteor, 24 ellenség, 4 bónusz |
-| 9 – LUNAR WASTES | Tiled, ~12200 px | 100 meteor, 26 ellenség, 3 fegyverbónusz egyszerre |
-| 10 – THE LAST NIGHT | Tiled, ~12600 px | 110 meteor, 26 ellenség, 8 ráugrás; a végső főellenség |
-| 11-től (DEEP NIGHT n) | procedurális | egyre nagyobb célokkal és gyorsabb görgetéssel |
+| 1 – CRATER FIELDS | Tiled, ~9800 px | 25 meteors, 6 enemies, collect 4 bonuses |
+| 2 – ASHEN VALLEY | Tiled, ~12200 px | 40 meteors, 3 stomps, 3 gold meteors |
+| 3 – BLOOD MOON | Tiled, ~9800 px | 50 meteors, 12 enemies, 5 gold meteors |
+| 4 – FROZEN RIDGE | Tiled, ~10200 px | 55 meteors, 17 enemies, 4 bonuses |
+| 5 – TOXIC MARSH | Tiled, ~10600 px | 70 meteors, 18 enemies, 3 weapon bonuses at once |
+| 6 – DUNE SEA | Tiled, ~11000 px | 80 meteors, 22 enemies, 6 stomps |
+| 7 – GLACIER NIGHT | Tiled, ~11400 px | 85 meteors, 20 enemies, 5 gold meteors |
+| 8 – SPORE HOLLOW | Tiled, ~11800 px | 100 meteors, 24 enemies, 4 bonuses |
+| 9 – LUNAR WASTES | Tiled, ~12200 px | 100 meteors, 26 enemies, 3 weapon bonuses at once |
+| 10 – THE LAST NIGHT | Tiled, ~12600 px | 110 meteors, 26 enemies, 8 stomps; the final boss |
+| 11+ (DEEP NIGHT n) | procedural | ever-larger goals and faster scrolling |
 
-- **Tiled-pályákon** (1–10; a 3–10. kiindulópontját a scripts/generate-levels.ps1 generálta, kézzel szerkeszthető a levels/ mappában) a talaj, a platformok, az ellenségek, a gombák, a bónuszok, a meteorzáporok és a főellenség
-  helye kézzel van elhelyezve; a főellenség a pályán kijelölt helyen jön, a küldetések pontot adnak, de nem kapuk.
-- **Procedurális pályákon** (3-tól) a terep és a meteorok, ellenségek véletlenszerűen generálódnak, és a főellenség
-  a három küldetés teljesítése után jön.
+- **Tiled levels** (1–10; the starting point of 3–10 was generated by `scripts/generate-levels.ps1` and can be edited by hand in `levels/`): ground, platforms, enemies, mushrooms, bonuses, meteor storms and the boss are placed by hand. The boss appears at the spot marked in the level. Missions award points but do not gate progress.
+- **Procedural levels** (from 3): terrain, meteors and enemies are generated randomly, and the boss comes after the three missions are completed.
 
-A küldetések a pálya elején, a szünetmenüben és a címképernyő QUESTS menüjében is látszanak.
+Missions are shown at the start of a level, in the pause menu, and in the QUESTS menu on the title screen.
 
-### Pályák szerkesztése (Tiled)
+### Editing levels (Tiled)
 
-A pályák a [Tiled](https://www.mapeditor.org) szerkesztőben készülnek: nyisd meg a `levels/blockbuster.tiled-project`
-projektet, szerkeszd a `.tmx`-et, exportáld JSON-ba (`assets/levels/`), majd fordítsd újra a játékot.
-A teljes leírás (formátum, objektumtípusok, hibakereső paraméterek): [`docs/LEVELS.md`](docs/LEVELS.md).
+Levels are made in [Tiled](https://www.mapeditor.org): open the `levels/blockbuster.tiled-project` project, edit the `.tmx`, export to JSON (`assets/levels/`), then rebuild the game. Full guide (format, object types, debug parameters): [`docs/LEVELS.md`](docs/LEVELS.md).
 
-## Beállítások
+## Settings
 
-A címképernyőről és a szünetmenüből: zene- és effekthangerő, hang be/ki, **automata lövés** (a lövés gombnyomás nélkül folyamatos;
-a nyilakkal célzol), nehézség (EASY / NORMAL / HARD, csak a címképernyőn állítható). A beállítások mentve maradnak.
+From the title screen and the pause menu: music and effects volume, sound on/off, **auto-fire** (shooting continues without pressing the button; you aim with the arrows), and difficulty (EASY / NORMAL / HARD, set on the title screen only). Settings are saved.
 
-### Gyorsuló játék
+### Speeding up
 
-Ha a kamera begyorsul, a hős is gyorsabban futhat: a futási sebessége legalább 1,35-szöröse a kamera sebességének
-(`player.followRatio`), így lépést lehet tartani.
+When the camera speeds up, the hero can run faster too: its running speed is at least 1.35× the camera speed (`player.followRatio`), so it can keep up.
 
-### Finomhangolás és cheatek
+### Tuning and cheats
 
-- Az értékek (sebességek, sebzések, időzítések, nehézségi szorzók) az `assets/config/game.json` fájlban hangolhatók, módosítás után
-  újra kell fordítani: [`docs/CONFIG.md`](docs/CONFIG.md).
-- A fejlesztői (nem release) buildben **F9** a cheat-menü: minden fegyver, kiegészítő, bónusz és nehezítő kipróbálható,
-  van GOD MODE, bónuszidő-befagyasztás, és spawn-kikapcsolás. Fejlesztői build: `-Dcheats` (VS Code:
-  *Build HTML5 (dev, cheats)*), a `-debug` és a `-Dtest` build is az. A release-ben a cheatek nincsenek benne.
+- Values (speeds, damage, timings, difficulty multipliers) are in `assets/config/game.json`. Rebuild after changing them: [`docs/CONFIG.md`](docs/CONFIG.md).
+- In development (non-release) builds, **F9** opens the cheat menu: every weapon, add-on, bonus and modifier can be tried, with GOD MODE, bonus-timer freeze, and spawn-off. Development build: `-Dcheats` (VS Code: *Build HTML5 (dev, cheats)*). The `-debug` and `-Dtest` builds include it too. Release builds contain no cheats.
 
-## Hang
+## Sound
 
-Minden hang és a zene kódból szintetizált (`Audio.hx`, `Music.hx`): 8 bites, 22 kHz-es, Amiga-stílusú
-hangminták és egy 4 csatornás, tracker-szerű dal. Nincsenek hangfájlok.
+All sounds and music are synthesized in code (`Audio.hx`, `Music.hx`): 8-bit, 22 kHz, Amiga-style sample sounds and a 4-channel, tracker-style song. There are no sound files.
 
-## Fejlesztés
+## Development
 
-Szükséges: Haxe 4.3.6, és haxelibből `lime 8.3.2`, `openfl 9.5.2`, `flixel 6.2.1`
-(a verziók a `Project.xml`-ben rögzítve vannak).
+Requirements: Haxe 4.3.6, and from haxelib `lime 8.3.2`, `openfl 9.5.2`, `flixel 6.2.1` (pinned in `Project.xml`).
 
-Függőségek telepítése egy lépésben:
+Install dependencies in one step:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File scripts/setup.ps1
@@ -167,40 +153,35 @@ powershell -ExecutionPolicy Bypass -File scripts/setup.ps1
 
 ### VS Code
 
-A `.vscode` mappa kész projektbeállítást tartalmaz:
+The `.vscode` folder has a ready-made project setup:
 
-- **Bővítmények** (megnyitáskor felajánlja): Haxe (`nadako.vshaxe`) és Lime (`openfl.lime-vscode-extension`).
-- **Feladatok** (Terminal → Run Task): *Install dependencies*, *Build HTML5* (Ctrl+Shift+B),
-  *Run HTML5 (browser)*, *Build HTML5 (test)*, *Build HashLink*, *Package for itch.io*, *Publish to itch.io*, *Clean*.
-- **F5**: a Lime bővítménnyel fordít és futtat (a célt a státuszsorban lehet választani, pl. HTML5).
-- A Haxe útvonala (`C:/HaxeToolkit`) a beállításokban és a feladatokban közvetlenül meg van adva,
-  így akkor is működik, ha a rendszer PATH-ja hibás.
+- **Extensions** (offered on opening): Haxe (`nadako.vshaxe`) and Lime (`openfl.lime-vscode-extension`).
+- **Tasks** (Terminal → Run Task): *Install dependencies*, *Build HTML5* (Ctrl+Shift+B), *Run HTML5 (browser)*, *Build HTML5 (test)*, *Build HashLink*, *Package for itch.io*, *Publish to itch.io*, *Clean*.
+- **F5**: builds and runs with the Lime extension (pick the target in the status bar, e.g. HTML5).
+- The Haxe path (`C:/HaxeToolkit`) is set directly in the settings and tasks, so it works even if the system PATH is wrong.
 
-### Közzététel itch.io-n
-**Egy lépésben:** VS Code *Run Task > Release (build + package + publish)* (vagy `scripts/release.ps1`): pályák ellenőrzése, release build, cheat-mentesség ellenőrzése, zip, feltöltés. Feltöltés nélkül: *Release (build + package, no publish)* (`-SkipPublish`).
-Az oldal szövegei, beállításai és képei: `docs/ITCH.md`, `docs/itch/`.
-
-
-- **Kézzel:** *Package for itch.io* feladat (vagy `scripts/package-itch.ps1`) → `dist/moonshard-html5.zip`, ezt kell feltölteni.
-- **Automatikusan:** *Publish to itch.io* feladat (`scripts/publish-itch.ps1`) – buildel, majd az itch.io hivatalos
-  `butler` eszközével feltölti (csak a változásokat). Egyszeri beállítás:
-  1. `itch.config.json`: `"user"` = itch.io felhasználónév, `"game"` = a projekt URL-neve.
-  2. Az első futtatáskor a butler letöltődik a `tools/` mappába, és böngészős bejelentkezést kér
-     (vagy `BUTLER_API_KEY` környezeti változó).
-  3. Az első feltöltés után az itch.io-n a „html5” fájlnál egyszer be kell pipálni:
-     *This file will be played in the browser*. A további feltöltések ezt a fájlt frissítik.
-
-Futtatás böngészőben:
+### Run in a browser
 
 ```bash
 haxelib run lime test html5
 ```
 
-Natív (HashLink) build:
+Native (HashLink) build:
 
 ```bash
 haxelib run lime test hl
 ```
 
-Automatikus füstteszt (Playwright): `haxelib run lime build html5 -Dtest`, majd szolgáld ki az
-`export/html5/bin` mappát (pl. `python3 -m http.server 8765`) és `node tests/smoke.js`.
+Automated smoke test (Playwright): `haxelib run lime build html5 -Dtest`, then serve `export/html5/bin` (for example `python3 -m http.server 8765`) and run `node tests/smoke.js`.
+
+### Publishing on itch.io
+
+**One step:** VS Code *Run Task > Release (build + package + publish)* (or `scripts/release.ps1`): checks the levels, release build, verifies there are no cheats, zips, uploads. Without uploading: *Release (build + package, no publish)* (`-SkipPublish`). The page text, settings and images are in `docs/ITCH.md` and `docs/itch/`.
+
+- **Manually:** the *Package for itch.io* task (or `scripts/package-itch.ps1`) creates `dist/moonshard-html5.zip`, which you upload.
+- **Automatically:** the *Publish to itch.io* task (`scripts/publish-itch.ps1`) builds, then uploads with itch.io's official `butler` tool (changes only). One-time setup:
+  1. `itch.config.json`: `"user"` = your itch.io username, `"game"` = the project's URL name.
+  2. On the first run, butler is downloaded to `tools/`, and it asks you to log in through the browser (or set the `BUTLER_API_KEY` environment variable).
+  3. After the first upload, on itch.io tick *This file will be played in the browser* once for the `html5` file. Later uploads update that file.
+
+Haxe code comments are in Hungarian; the game's UI text is in English.
